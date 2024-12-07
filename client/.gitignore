@@ -1,0 +1,47 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+node_modules/
+
+# Vite build output
+dist/
+
+# Production environment
+.env
+.env.*.local
+
+# Editor-specific files
+.vscode/
+.idea/
+.DS_Store
+*.swp
+
+# System files
+Thumbs.db
+*.bak
+.DS_Store
+
+
+# Temporary files
+*.tmp
+*.temp
+
+# Client folder (React with Vite)
+client/node_modules/
+client/dist/
+client/.env
+client/.env.*.local
+
+# Server folder
+server/node_modules/
+server/dist/
+server/*.env
+server/.env.*.local
+
+# Git-specific
+*.orig
