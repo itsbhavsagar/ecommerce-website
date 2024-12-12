@@ -9,7 +9,7 @@ const Navbar = () => {
       </div>
 
       <div className="flex m-4">
-        <Link to="/contact">Conatct</Link>
+        <Link to="/contact">Contact</Link>
       </div>
 
       <div className="flex m-4">

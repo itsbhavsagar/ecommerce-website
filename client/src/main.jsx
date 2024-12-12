@@ -16,7 +16,7 @@ let Router = createBrowserRouter([
     element: <App />,
     children: [
       { path: "/", element: <Home /> },
-      { path: "about", element: <About /> },
+      { path: "/about", element: <About /> },
       {
         path: "/contact",
         element: <Contact />,
@@ -27,10 +27,10 @@ let Router = createBrowserRouter([
       },
       {
         path: "/product/:id",
-        element: <SingleProduct></SingleProduct>
-      }
+        element: <SingleProduct></SingleProduct>,
+      },
     ],
-    errorElement : <ErrorPage></ErrorPage>
+    errorElement: <ErrorPage></ErrorPage>,
   },
 ]);
 

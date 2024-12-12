@@ -53,21 +53,7 @@ const Home = () => {
 
   return (
     <>
-      {/* SEARCH BAR */}
-      <div className="items-center flex flex-1 place-content-center">
-        <input
-          value={searchText}
-          onChange={(event) => {
-            setSearchText(event.target.value);
-          }}
-          type="text"
-          placeholder="Search"
-          className="input input-bordered w-4 md:w-auto"
-        />
-        <button className="btn flex btn-warning m-2" onClick={searchProduct}>
-          Search
-        </button>
-      </div>
+     
 
       {/* FILTER BUTTONS */ console.log("rendering")}
 
@@ -108,11 +94,29 @@ const Home = () => {
         </div>
       </div>
 
+        {/* SEARCH BAR */}
+      <div className="items-center flex flex-1 place-content-center">
+        <input
+          value={searchText}
+          onChange={(event) => {
+            setSearchText(event.target.value);
+          }}
+          type="text"
+          placeholder="Search"
+          className="input input-bordered w-3/5"
+        />
+        <button className="btn flex btn-warning m-2" onClick={searchProduct}>
+          Search
+        </button>
+      </div>
+
       <div className="flex flex-wrap justify-around">
         {ProductArray.map((obj) => (
           <ProductCard obj={obj} key={obj.id} />
         ))}
       </div>
+
+      
     </>
   );
 };

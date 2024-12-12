@@ -1,10 +1,18 @@
 import React from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
+
 
 let ProductCard = ({ obj }) => {
-  let { images, discountPercentage, title, price, rating, category } = obj;
+
+  
+  let { images, discountPercentage, title, price, rating, category , id} = obj;
+let Navigate = useNavigate();
+  let handleClick= ()=> {
+    Navigate(`/product/${id}`)
+  }
   return (
     <>
-      <div className="relative m-4 flex w-full max-w-xs flex-col overflow-hidden rounded-lg border border-lime-300 bg-white shadow-md">
+      <div className="relative m-4 flex w-full max-w-xs flex-col overflow-hidden rounded-lg border border-lime-300 bg-white shadow-md" onClick={handleClick}>
         <a
           className="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl"
           href="#"
