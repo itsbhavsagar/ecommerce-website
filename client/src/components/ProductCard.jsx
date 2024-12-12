@@ -1,67 +1,67 @@
-import React from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
-
+import React from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 
 let ProductCard = ({ obj }) => {
-
-  
-  let { images, discountPercentage, title, price, rating, category , id} = obj;
-let Navigate = useNavigate();
-  let handleClick= ()=> {
-    Navigate(`/product/${id}`)
-  }
+  let {
+    images,
+    discountPercentage,
+    title,
+    price,
+    rating,
+    category,
+    brand,
+    description,
+    id,
+  } = obj;
+  let Navigate = useNavigate();
+  let handleClick = () => {
+    Navigate(`/product/${id}`);
+  };
   return (
     <>
-      <div className="relative m-4 flex w-full max-w-xs flex-col overflow-hidden rounded-lg border border-lime-300 bg-white shadow-md" onClick={handleClick}>
-        <a
-          className="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl"
-          href="#"
-        >
-          <img className="object-cover hover:scale-110 transition duration-300" src={images[0]} alt="product image" />
-
-          <span className="absolute top-0 left-0 m-2 rounded-full bg-black px-2 text-center text-sm font-medium text-white">
-            {discountPercentage}% OFF
-          </span>
-        </a>
-        <div className="mt-4 px-5 pb-5">
-          <a href="#">
-            <h5 className="text-lg tracking-tight text-slate-900">{title}</h5>
-          </a>
-          <div className="mt-2 mb-5 flex items-center justify-between">
-            <p>
-              <span className="text-sm font-bold text-slate-900">${price}</span>
-              <span className="text-xs text-slate-900 line-through">$699</span>
+      <div
+        className="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl m-2"
+        onClick={handleClick}
+      >
+        <a href="#">
+          <img
+            src={images[0]}
+            alt="Product"
+            className="h-52 w-72 object-scale-down rounded-t-xl"
+          />
+          <div className="px-4 py-3 w-72">
+            <span className="text-gray-400 mr-3 uppercase text-xs">
+              {brand}
+            </span>
+            <p className="text-lg font-bold text-black truncate block capitalize">
+              {title}
             </p>
             <div className="flex items-center">
-              <span className="mr-2 ml-3 rounded bg-yellow-200 text-black px-2.5 py-0.5 text-xs font-semibold">
-                {rating}
-              </span>
-              <span className="mr-2 ml-3 rounded bg-yellow-200 text-black px-2.5 py-0.5 text-xs font-semibold">
-                {category}
-              </span>
+              <p className="text-lg font-semibold text-black cursor-auto my-3">
+                ${price}
+              </p>
+              <del>
+                <p className="text-sm text-gray-600 cursor-auto ml-2">$199</p>
+              </del>
+              <div className="ml-auto text-black">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  fill="currentColor"
+                  className="bi bi-bag-plus"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z"
+                  />
+                  <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
+                </svg>
+              </div>
             </div>
           </div>
-          <a
-            href="#"
-            className="flex items-center justify-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="mr-2 h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-              />
-            </svg>
-            Add to cart
-          </a>
-        </div>
+        </a>
       </div>
     </>
   );

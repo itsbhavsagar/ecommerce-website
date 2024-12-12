@@ -43,10 +43,10 @@ const SingleProduct = () => {
               <div className="-m-1">
                 <a
                   href="#"
-                  className="rounded-md p-1 text-sm font-medium text-gray-600 focus:text-gray-900 focus:shadow hover:text-gray-800"
+                  className="rounded-md p-1 text-sm font-medium text-gray-900 focus:text-gray-900 focus:shadow hover:text-gray-800"
                 >
-                  {" "}
-                  Home{" "}
+                 
+                  Home
                 </a>
               </div>
             </li>
@@ -57,10 +57,10 @@ const SingleProduct = () => {
                 <div className="-m-1">
                   <a
                     href="#"
-                    className="rounded-md p-1 text-sm font-medium text-gray-600 focus:text-gray-900 focus:shadow hover:text-gray-800"
+                    className="rounded-md p-1 text-sm font-medium text-gray-900 focus:text-gray-900 focus:shadow hover:text-gray-800"
                   >
-                    {" "}
-                    Products{" "}
+                   
+                    Products
                   </a>
                 </div>
               </div>
@@ -72,7 +72,7 @@ const SingleProduct = () => {
                 <div className="-m-1">
                   <a
                     href="#"
-                    className="rounded-md p-1 text-sm font-medium text-gray-600 focus:text-gray-900 focus:shadow hover:text-gray-800"
+                    className="rounded-md p-1 text-sm font-medium text-gray-900 focus:text-gray-900 focus:shadow hover:text-gray-800"
                     aria-current="page"
                   >
                     {category}
