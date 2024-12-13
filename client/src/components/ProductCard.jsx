@@ -1,5 +1,6 @@
 import React from "react";
 import { Navigate, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 let ProductCard = ({ obj }) => {
   let {
@@ -23,7 +24,7 @@ let ProductCard = ({ obj }) => {
         className="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl items-center ml-8"
         onClick={handleClick}
       >
-        <a href="#">
+        <Link to="#">
           <img
             src={images[0]}
             alt="Product"
@@ -41,7 +42,7 @@ let ProductCard = ({ obj }) => {
                 ${price}
               </p>
               <del>
-                <p className="text-sm text-gray-600 cursor-auto ml-2">$199</p>
+                <p className="text-sm text-gray-600 cursor-auto ml-2">$999</p>
               </del>
               <div className="ml-auto text-black">
                 <svg
@@ -61,7 +62,7 @@ let ProductCard = ({ obj }) => {
               </div>
             </div>
           </div>
-        </a>
+        </Link>
       </div>
     </>
   );

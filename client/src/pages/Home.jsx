@@ -110,7 +110,7 @@ const Home = () => {
         </button>
       </div>
 
-      <div className="flex flex-wrap gap-8  border border-rose-500  ">
+      <div className="flex flex-wrap gap-8 border border-rose-500  ">
         {ProductArray.map((obj) => (
           <ProductCard obj={obj} key={obj.id} />
         ))}
