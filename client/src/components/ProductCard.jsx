@@ -20,7 +20,7 @@ let ProductCard = ({ obj }) => {
   return (
     <>
       <div
-        className="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl m-2"
+        className="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl items-center ml-8"
         onClick={handleClick}
       >
         <a href="#">
