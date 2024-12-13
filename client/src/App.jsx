@@ -1,14 +1,15 @@
-import React from 'react';
-import Navbar from './components/Navbar';
-import { Outlet } from 'react-router-dom';
-
+import React from "react";
+import Navbar from "./components/Navbar";
+import { Outlet } from "react-router-dom";
+import ThemeContext from "./utility/ThemeContext";
 
 function App() {
   return (
     <>
-      <Navbar />
-    <Outlet></Outlet>
-     
+      <ThemeContext>
+        <Navbar />
+        <Outlet></Outlet>
+      </ThemeContext>
     </>
   );
 }

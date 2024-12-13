@@ -21,7 +21,6 @@ const Home = () => {
 
   useEffect(() => {
     getData();
-    console.log("useEffect called");
   }, []);
 
   let filterTopRated = () => {
@@ -45,17 +44,13 @@ const Home = () => {
     setSearchText("");
   };
 
-  console.log("Component called");
-
   if (ProductArray.length == 0) {
     return <ShimmerUI />;
   }
 
   return (
     <>
-     
-
-      {/* FILTER BUTTONS */ console.log("rendering")}
+      {/* FILTER BUTTONS */}
 
       <div className="flex flex-wrap justify-center overflow-auto">
         <div className="btn-box flex-wrap sm:gap-8 space-x-4">
@@ -94,7 +89,7 @@ const Home = () => {
         </div>
       </div>
 
-        {/* SEARCH BAR */}
+      {/* SEARCH BAR */}
       <div className="items-center flex flex-1 place-content-center">
         <input
           value={searchText}
@@ -115,8 +110,6 @@ const Home = () => {
           <ProductCard obj={obj} key={obj.id} />
         ))}
       </div>
-
-      
     </>
   );
 };
