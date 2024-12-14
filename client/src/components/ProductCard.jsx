@@ -1,6 +1,8 @@
 import React from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Theme } from "../utility/ThemeContext";
 
 let ProductCard = ({ obj }) => {
   let {
@@ -18,10 +20,17 @@ let ProductCard = ({ obj }) => {
   let handleClick = () => {
     Navigate(`/product/${id}`);
   };
+
+  let {theme, setTheme} = useContext(Theme);
+
+let lightTheme = "w-72 bg-slate-200 shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl items-center ml-8 text-black"
+
+let darkTheme = "w-72 bg-gray-700 shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl items-center ml-8 text-white"
+
   return (
     <>
       <div
-        className="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl items-center ml-8"
+        className={theme == 'light' ? lightTheme : darkTheme}
         onClick={handleClick}
       >
         <Link to="#">
@@ -34,17 +43,17 @@ let ProductCard = ({ obj }) => {
             <span className="text-gray-400 mr-3 uppercase text-xs">
               {brand}
             </span>
-            <p className="text-lg font-bold text-black truncate block capitalize">
+            <p className="text-lg font-bold  truncate block capitalize">
               {title}
             </p>
             <div className="flex items-center">
-              <p className="text-lg font-semibold text-black cursor-auto my-3">
+              <p className="text-lg font-semibold  cursor-auto my-3">
                 ${price}
               </p>
               <del>
-                <p className="text-sm text-gray-600 cursor-auto ml-2">$999</p>
+                <p className="text-sm  cursor-auto ml-2">$999</p>
               </del>
-              <div className="ml-auto text-black">
+              <div className="ml-auto ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
@@ -64,6 +73,7 @@ let ProductCard = ({ obj }) => {
           </div>
         </Link>
       </div>
+      
     </>
   );
 };

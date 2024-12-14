@@ -10,14 +10,18 @@ const Navbar = () => {
     setTheme(theme == "light" ? "dark" : "light");
   };
 
+  let darkTheme = "navbar bg-gray-700 shadow-md text-white duration-500 ";
+  let lightTheme = "navbar bg-slate-200 shadow-md text-black duration-500 ";
+
+
   return (
-    <div className="navbar bg-base-100 shadow-md">
+    <div className={theme == 'light' ? lightTheme : darkTheme}>
       <div className="flex-1">
         <Link to="/" className="btn btn-ghost text-xl">
           ShopEase 🛍️
         </Link>
       </div>
-
+      {console.log(theme)}
       <div className="flex m-4">
         <Link to="/contact">Contact</Link>
       </div>
@@ -38,6 +42,8 @@ const Navbar = () => {
         />
       </ul>
     </div>
+
+    
   );
 };
 
