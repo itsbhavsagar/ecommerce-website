@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Children } from "react";
 import ProductCard from "../components/ProductCard";
 import ShimmerUI from "../ShimmerUI";
 
@@ -10,6 +10,8 @@ const Home = () => {
   let [ProductArray, setProductArray] = useState([]);
   let [searchText, setSearchText] = useState("");
 
+
+// Dark and Light Theme
   let { theme, setTheme } = useContext(Theme);
 
   let getData = async () => {
@@ -49,6 +51,7 @@ const Home = () => {
     return <ShimmerUI />;
   }
 
+  //  Dark and Light Theme implemetation 
   let darkTheme =
     "bg-gray-600 flex flex-wrap justify-center overflow-auto text-white duration-500";
   let lightTheme =
@@ -60,34 +63,35 @@ const Home = () => {
 
       <div className={theme == "light" ? lightTheme : darkTheme}>
         <div className="btn-box flex-wrap sm:gap-8 space-x-4">
+          
           <button
-            className="btn btn-outline m-1 btn-error text-xs sm:text-sm md:text-base"
+            className="btn  m-1  text-xs sm:text-sm md:text-base"
             onClick={filterTopRated}
           >
             Top Rated
           </button>
           <button
-            className="btn btn-outline btn-info text-xs sm:text-sm md:text-base"
+            className="btn   text-xs sm:text-sm md:text-base"
             onClick={() => filterProduct("beauty")}
           >
             Beauty
           </button>
 
           <button
-            className="btn btn-outline btn-secondary text-xs sm:text-sm md:text-base"
+            className="btn   text-xs sm:text-sm md:text-base"
             onClick={() => filterProduct("fragrances")}
           >
             Fragrances
           </button>
           <button
-            className="btn btn-outline btn-success text-xs sm:text-sm md:text-base"
+            className="btn   text-xs sm:text-sm md:text-base"
             onClick={() => filterProduct("furniture")}
           >
             Furniture
           </button>
 
           <button
-            className="btn btn-outline btn-warning text-xs sm:text-sm md:text-base"
+            className="btn  text-xs sm:text-sm md:text-base"
             onClick={() => filterProduct("groceries")}
           >
             Groceries

@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
+import { Theme } from "../utility/ThemeContext";
 
 const SingleProduct = () => {
   const [obj, setObj] = useState(null);
+
+  let {theme, setTheme} = useContext(Theme)
 
   let { id } = useParams();
 
@@ -34,8 +37,13 @@ const SingleProduct = () => {
     brand,
   } = obj;
 
+
+  let lightTheme = "py-12 sm:py-16 bg-slate-200 text-black duration-500"
+  let darkTheme = "py-12 sm:py-16 bg-gray-600 text-white "
+
+
   return (
-    <section className="py-12 sm:py-16 bg-gray-200 ">
+    <section className={theme == "light" ? lightTheme : darkTheme}>
       <div className="container mx-auto px-4">
         <nav className="flex">
           <ol role="list" className="flex items-center">
@@ -43,7 +51,7 @@ const SingleProduct = () => {
               <div className="-m-1">
                 <a
                   href="#"
-                  className="rounded-md p-1 text-sm font-medium text-gray-900 focus:text-gray-900 focus:shadow hover:text-gray-800"
+                  className="rounded-md p-1 text-sm font-medium  focus:text-gray-900 focus:shadow hover:text-gray-800"
                 >
                  
                   Home
@@ -53,11 +61,11 @@ const SingleProduct = () => {
 
             <li className="text-left">
               <div className="flex items-center">
-                <span className="mx-2 text-gray-400">/</span>
+                <span className="mx-2 0">/</span>
                 <div className="-m-1">
                   <a
                     href="#"
-                    className="rounded-md p-1 text-sm font-medium text-gray-900 focus:text-gray-900 focus:shadow hover:text-gray-800"
+                    className="rounded-md p-1 text-sm font-medium  focus:text-gray-900 focus:shadow hover:text-gray-800"
                   >
                    
                     Products
@@ -68,11 +76,11 @@ const SingleProduct = () => {
 
             <li className="text-left">
               <div className="flex items-center">
-                <span className="mx-2 text-gray-400">/</span>
+                <span className="mx-2 0">/</span>
                 <div className="-m-1">
                   <a
                     href="#"
-                    className="rounded-md p-1 text-sm font-medium text-gray-900 focus:text-gray-900 focus:shadow hover:text-gray-800"
+                    className="rounded-md p-1 text-sm font-medium  focus:text-gray-900 focus:shadow hover:text-gray-800"
                     aria-current="page"
                   >
                     {category}
@@ -134,8 +142,8 @@ const SingleProduct = () => {
           </div>
 
           <div className="lg:col-span-2 lg:row-span-2 lg:row-end-2">
-            <h2 class="mt-8 text-base text-gray-900">{brand}</h2>
-            <h1 className="text-2xl font-bold text-gray-800 sm:text-3xl">
+            <h2 class="mt-8 text-base ">{brand}</h2>
+            <h1 className="text-2xl font-bold  sm:text-3xl">
               {title}
             </h1>
 
@@ -197,19 +205,19 @@ const SingleProduct = () => {
                   ></path>
                 </svg>
               </div>
-              <p className="ml-2 text-sm font-medium text-black">
+              <p className="ml-2 text-sm font-medium ">
                 1,209 Reviews
               </p>
             </div>
 
             <div className="mt-10 flex flex-col items-center justify-between space-y-4 border-t border-b py-4 sm:flex-row sm:space-y-0">
               <div className="flex items-end">
-                <h1 className="text-3xl font-bold text-gray-800">${price}</h1>
+                <h1 className="text-3xl font-bold ">${price}</h1>
               </div>
 
               <button
                 type="button"
-                className="inline-flex items-center justify-center rounded-md border-2 border-transparent bg-gray-900 bg-none px-12 py-3 text-center text-base font-bold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-gray-800"
+                className="inline-flex items-center justify-center rounded-md border-2 border-transparent  bg-none px-12 py-3 text-center text-base font-bold  transition-all duration-200 ease-in-out focus:shadow "
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -230,9 +238,9 @@ const SingleProduct = () => {
             </div>
 
             <ul className="mt-8 space-y-2">
-              <li className="flex items-center text-left text-sm font-medium text-gray-600">
+              <li className="flex items-center text-left text-sm font-medium ">
                 <svg
-                  className="mr-2 block h-5 w-5 align-middle text-gray-700"
+                  className="mr-2 block h-5 w-5 align-middle "
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -249,9 +257,9 @@ const SingleProduct = () => {
                 Free shipping worldwide
               </li>
 
-              <li className="flex items-center text-left text-sm font-medium text-gray-600">
+              <li className="flex items-center text-left text-sm font-medium ">
                 <svg
-                  className="mr-2 block h-5 w-5 align-middle text-gray-700"
+                  className="mr-2 block h-5 w-5 align-middle "
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -276,27 +284,27 @@ const SingleProduct = () => {
                 <a
                   href="#"
                   title=""
-                  className="border-b-2 border-gray-900 py-4 text-sm font-medium text-gray-900 hover:border-gray-400 hover:text-gray-800"
+                  className="border-b-2 border-gray-900 py-4 text-sm font-medium  hover:border-gray-400 hover:text-gray-800"
                 >
-                  {" "}
-                  Description{" "}
+                 
+                  Description
                 </a>
 
                 <a
                   href="#"
                   title=""
-                  className="inline-flex items-center border-b-2 border-transparent py-4 text-sm font-medium text-gray-600"
+                  className="inline-flex items-center border-b-2 border-transparent py-4 text-sm font-medium "
                 >
                   Reviews
-                  <span className="ml-2 block rounded-full bg-gray-500 px-2 py-px text-xs font-bold text-gray-100">
-                    {" "}
-                    1,209{" "}
+                  <span className="ml-2 block rounded-full  px-2 py-px text-xs font-bold ">
+                   
+                    1,209
                   </span>
                 </a>
               </nav>
             </div>
 
-            <div className="mt-8 flow-root sm:mt-12 text-gray-800">
+            <div className="mt-8 flow-root sm:mt-12 ">
               <h1 className="mt-8 text-3xl font-bold">{title}</h1>
               <p className="mt-4">{description}</p>
             </div>
