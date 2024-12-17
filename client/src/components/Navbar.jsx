@@ -10,8 +10,8 @@ const Navbar = () => {
     setTheme(theme == "light" ? "dark" : "light");
   };
 
-  let darkTheme = "navbar bg-gray-700 shadow-md text-white duration-500 ";
-  let lightTheme = "navbar bg-slate-200 shadow-md text-black duration-500 ";
+  let darkTheme = "navbar bg-gray-700  text-white duration-500  "
+  let lightTheme = "navbar bg-slate-200  text-black duration-500  "
 
 
   return (
@@ -21,7 +21,7 @@ const Navbar = () => {
           ShopEase 🛍️
         </Link>
       </div>
-      {console.log(theme)}
+     
       <div className="flex m-4">
         <Link to="/contact">Contact</Link>
       </div>

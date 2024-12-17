@@ -107,7 +107,7 @@ const Home = () => {
             }}
             type="text"
             placeholder="Search"
-            className="input input-bordered border-red-700 w-3/5"
+            className="input input-bordered border-red-700 w-3/5 text-white"
           />
           <button className="btn flex btn-warning m-2" onClick={searchProduct}>
             Search
