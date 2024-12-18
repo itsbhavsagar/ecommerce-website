@@ -33,6 +33,10 @@ const Navbar = () => {
       <div className="flex m-4">
         <Link to="/cart"> Cart</Link>
       </div>
+
+      <div className="flex m-4 text-red-600 font-bold">
+        <Link to="/food">Food</Link>
+      </div>
       <ul className="">
         <input
           onClick={handleThemeChange}

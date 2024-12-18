@@ -1,4 +1,4 @@
-import { StrictMode } from "react";
+import React, { lazy, Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
@@ -9,6 +9,9 @@ import Cart from "./components/Cart.jsx";
 import Home from "./pages/Home.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import SingleProduct from "./pages/SingleProduct.jsx";
+// import Food from "./Food.jsx";
+
+let Food = lazy(() => import("./Food.jsx"));
 
 let Router = createBrowserRouter([
   {
@@ -25,9 +28,18 @@ let Router = createBrowserRouter([
         path: "/cart",
         element: <Cart />,
       },
+
       {
         path: "/product/:id",
         element: <SingleProduct></SingleProduct>,
+      },
+      {
+        path: "/food",
+        element: (
+          <Suspense fallback={<h1>....Loading</h1>}>
+            <Food />
+          </Suspense>
+        ),
       },
     ],
     errorElement: <ErrorPage></ErrorPage>,

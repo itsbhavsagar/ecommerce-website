@@ -1,25 +1,16 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { Theme } from "../utility/ThemeContext";
+import useGetSingleProduct from "../utility/useGetSingleProduct";
 
 const SingleProduct = () => {
-  const [obj, setObj] = useState(null);
+  
 
   let {theme, setTheme} = useContext(Theme)
 
   let { id } = useParams();
 
-  let getData = async () => {
-    let data = await fetch(`https://dummyjson.com/products/${id}`);
-
-    let Jsondata = await data.json();
-    setObj(Jsondata);
-
-    console.log(Jsondata);
-  };
-  useEffect(() => {
-    getData();
-  }, []);
+  let obj = useGetSingleProduct(id);
 
   if (obj == null) {
     return <h1>....loading</h1>;
@@ -142,7 +133,7 @@ const SingleProduct = () => {
           </div>
 
           <div className="lg:col-span-2 lg:row-span-2 lg:row-end-2">
-            <h2 class="mt-8 text-base ">{brand}</h2>
+            <h2 className="mt-8 text-base ">{brand}</h2>
             <h1 className="text-2xl font-bold  sm:text-3xl">
               {title}
             </h1>
