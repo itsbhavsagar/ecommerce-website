@@ -43,8 +43,6 @@ const Home = () => {
   if (ProductArray.length == 0) {
     return <ShimmerUI />;
   }
-
-  //  Dark and Light Theme implemetation
   let darkTheme =
     "bg-gray-600 flex flex-wrap justify-center overflow-auto text-white duration-500";
   let lightTheme =
