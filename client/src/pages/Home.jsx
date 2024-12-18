@@ -1,30 +1,23 @@
-import React, { useState, useEffect, Children } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import ProductCard from "../components/ProductCard";
 import ShimmerUI from "../ShimmerUI";
-
-import { useContext } from "react";
 import { Theme } from "../utility/ThemeContext";
+import useGetAllProducts from "../utility/useGetAllProducts";
 
 const Home = () => {
   let [allData, setAllData] = useState([]);
   let [ProductArray, setProductArray] = useState([]);
   let [searchText, setSearchText] = useState("");
 
-
-// Dark and Light Theme
-  let { theme, setTheme } = useContext(Theme);
-
-  let getData = async () => {
-    let data = await fetch("https://dummyjson.com/products");
-    let obj = await data.json();
-
-    setProductArray(obj.products);
-    setAllData(obj.products);
-  };
+  let arr = useGetAllProducts();
 
   useEffect(() => {
-    getData();
-  }, []);
+    setAllData(arr);
+    setProductArray(arr);
+  }, [arr]);
+
+  // Dark and Light Theme
+  let { theme, setTheme } = useContext(Theme);
 
   let filterTopRated = () => {
     let data = ProductArray.filter((obj) => obj.rating > 4.5);
@@ -51,7 +44,7 @@ const Home = () => {
     return <ShimmerUI />;
   }
 
-  //  Dark and Light Theme implemetation 
+  //  Dark and Light Theme implemetation
   let darkTheme =
     "bg-gray-600 flex flex-wrap justify-center overflow-auto text-white duration-500";
   let lightTheme =
@@ -63,7 +56,6 @@ const Home = () => {
 
       <div className={theme == "light" ? lightTheme : darkTheme}>
         <div className="btn-box flex-wrap sm:gap-8 space-x-4">
-          
           <button
             className="btn  m-1  text-xs sm:text-sm md:text-base"
             onClick={filterTopRated}
