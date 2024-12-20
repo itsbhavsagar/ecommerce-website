@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import ProductCard from "../components/ProductCard";
-import ShimmerUI from "../ShimmerUI";
+import ShimmerUI from "../components/ShimmerUI";
 import { Theme } from "../hooks/ThemeContext";
 import useGetAllProducts from "../hooks/useGetAllProducts";
 

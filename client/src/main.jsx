@@ -5,7 +5,7 @@ import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
-import Cart from "./components/Cart.jsx";
+import Cart from "./features/cart/Cart.jsx";
 import Home from "./pages/Home.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import SingleProduct from "./pages/SingleProduct.jsx";

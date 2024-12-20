@@ -3,13 +3,18 @@ import Navbar from "./components/Navbar";
 import { Outlet } from "react-router-dom";
 import ThemeContext from "./hooks/ThemeContext";
 
+import AppStore from "./features/cart/AppStore";
+import { Provider } from "react-redux";
+
 function App() {
   return (
     <>
-      <ThemeContext>
-        <Navbar />
-        <Outlet></Outlet>
-      </ThemeContext>
+      <Provider store={AppStore}>
+        <ThemeContext>
+          <Navbar />
+          <Outlet></Outlet>
+        </ThemeContext>
+      </Provider>
     </>
   );
 }
