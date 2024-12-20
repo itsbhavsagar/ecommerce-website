@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { Theme } from "../utility/ThemeContext";
-import useGetSingleProduct from "../utility/useGetSingleProduct";
+import { Theme } from "../hooks/ThemeContext";
+import useGetSingleProduct from "../hooks/useGetSingleProduct";
 
 const SingleProduct = () => {
   

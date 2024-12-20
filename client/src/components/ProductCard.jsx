@@ -2,7 +2,7 @@ import React from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { Theme } from "../utility/ThemeContext";
+import { Theme } from "../hooks/ThemeContext";
 
 let ProductCard = ({ obj }) => {
   let { images, title, price, brand, id } = obj;

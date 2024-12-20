@@ -1,8 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
 import ProductCard from "../components/ProductCard";
 import ShimmerUI from "../ShimmerUI";
-import { Theme } from "../utility/ThemeContext";
-import useGetAllProducts from "../utility/useGetAllProducts";
+import { Theme } from "../hooks/ThemeContext";
+import useGetAllProducts from "../hooks/useGetAllProducts";
 
 const Home = () => {
   let [allData, setAllData] = useState([]);
