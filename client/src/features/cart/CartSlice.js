@@ -1,13 +1,18 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 let cart = createSlice({
-  name: "cart",
+  name: 'cart',
   initialState: {
     items: [],
+    ids: [],
   },
   reducers: {
     addCart: (state, action) => {
-      state.items.push(action.payload);
+      let obj = action.payload;
+
+      let objId = obj.id;
+
+      console.log(state.ids.find((id) => id === objId));
     },
 
     removeCart: (state, action) => {

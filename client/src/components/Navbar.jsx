@@ -1,18 +1,22 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { useContext } from "react";
-import { Theme } from "../hooks/ThemeContext";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { Theme } from '../hooks/ThemeContext';
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
   let { theme, setTheme } = useContext(Theme);
 
+  let cartItem = useSelector((state) => state.cart.items);
+
+  console.log(cartItem);
+
   let handleThemeChange = () => {
-    setTheme(theme == "light" ? "dark" : "light");
+    setTheme(theme == 'light' ? 'dark' : 'light');
   };
 
-  let darkTheme = "navbar bg-gray-700  text-white duration-500  "
-  let lightTheme = "navbar bg-slate-200  text-black duration-500  "
-
+  let darkTheme = 'navbar bg-gray-700  text-white duration-500  ';
+  let lightTheme = 'navbar bg-slate-200  text-black duration-500  ';
 
   return (
     <div className={theme == 'light' ? lightTheme : darkTheme}>
@@ -21,7 +25,7 @@ const Navbar = () => {
           ShopEase 🛍️
         </Link>
       </div>
-     
+
       <div className="flex m-4">
         <Link to="/contact">Contact</Link>
       </div>
@@ -31,7 +35,10 @@ const Navbar = () => {
       </div>
 
       <div className="flex m-4">
-        <Link to="/cart"> Cart</Link>
+        <Link to="/cart">
+          {' '}
+          Cart<sup className="text-red-600 font-bold"> {cartItem.length}</sup>
+        </Link>
       </div>
 
       <div className="flex m-4 text-red-600 font-bold">
@@ -46,8 +53,6 @@ const Navbar = () => {
         />
       </ul>
     </div>
-
-    
   );
 };
 
