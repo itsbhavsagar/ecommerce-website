@@ -1,20 +1,20 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react';
 
 const useGetSingleProduct = (id) => {
-    const [obj, setObj] = useState(null);
- let getData = async () => {
-     let data = await fetch(`https://dummyjson.com/products/${id}`);
- 
-     let Jsondata = await data.json();
-     setObj(Jsondata);
- 
-     console.log(Jsondata);
-   };
-   useEffect(() => {
-     getData();
-   }, []);
+  const [obj, setObj] = useState(null);
+  let getData = async () => {
+    let data = await fetch(`https://dummyjson.com/products/${id}`);
 
-   return obj;
-}
+    let Jsondata = await data.json();
+    setObj(Jsondata);
 
-export default useGetSingleProduct
+    console.log(Jsondata);
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+
+  return obj;
+};
+
+export default useGetSingleProduct;
