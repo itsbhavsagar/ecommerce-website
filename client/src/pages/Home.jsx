@@ -1,13 +1,14 @@
-import React, { useState, useContext, useEffect } from "react";
-import ProductCard from "../components/ProductCard";
-import ShimmerUI from "../components/ShimmerUI";
-import { Theme } from "../hooks/ThemeContext";
-import useGetAllProducts from "../hooks/useGetAllProducts";
+import React, { useState, useContext, useEffect } from 'react';
+import ProductCard from '../components/ProductCard';
+import ShimmerUI from '../components/ShimmerUI';
+import { Theme } from '../hooks/ThemeContext';
+import useGetAllProducts from '../hooks/useGetAllProducts';
+import AddedProductInCart from '../features/cart/AddedProductInCart';
 
 const Home = () => {
   let [allData, setAllData] = useState([]);
   let [ProductArray, setProductArray] = useState([]);
-  let [searchText, setSearchText] = useState("");
+  let [searchText, setSearchText] = useState('');
 
   let arr = useGetAllProducts();
 
@@ -17,7 +18,7 @@ const Home = () => {
   }, [arr]);
 
   // Dark and Light Theme
-  let { theme, setTheme } = useContext(Theme);
+  let { theme } = useContext(Theme);
 
   let filterTopRated = () => {
     let data = ProductArray.filter((obj) => obj.rating > 4.5);
@@ -37,22 +38,25 @@ const Home = () => {
     );
 
     setProductArray(data);
-    setSearchText("");
+    setSearchText('');
   };
 
   if (ProductArray.length == 0) {
     return <ShimmerUI />;
   }
   let darkTheme =
-    "bg-gray-600 flex flex-wrap justify-center overflow-auto text-white duration-500";
+    'bg-gray-600 flex flex-wrap justify-center overflow-auto text-white duration-500';
   let lightTheme =
-    "bg-slate-200 flex flex-wrap justify-center overflow-auto text-black duration-500";
+    'bg-slate-200 flex flex-wrap justify-center overflow-auto text-black duration-500';
+
+  // Product Added Notification
+  let AddedComponent = AddedProductInCart(ProductCard); // Its a HOC
 
   return (
     <>
       {/* FILTER BUTTONS */}
 
-      <div className={theme == "light" ? lightTheme : darkTheme}>
+      <div className={theme == 'light' ? lightTheme : darkTheme}>
         <div className="btn-box flex-wrap sm:gap-8 space-x-4">
           <button
             className="btn  m-1  text-xs sm:text-sm md:text-base"
@@ -62,27 +66,27 @@ const Home = () => {
           </button>
           <button
             className="btn   text-xs sm:text-sm md:text-base"
-            onClick={() => filterProduct("beauty")}
+            onClick={() => filterProduct('beauty')}
           >
             Beauty
           </button>
 
           <button
             className="btn   text-xs sm:text-sm md:text-base"
-            onClick={() => filterProduct("fragrances")}
+            onClick={() => filterProduct('fragrances')}
           >
             Fragrances
           </button>
           <button
             className="btn   text-xs sm:text-sm md:text-base"
-            onClick={() => filterProduct("furniture")}
+            onClick={() => filterProduct('furniture')}
           >
             Furniture
           </button>
 
           <button
             className="btn  text-xs sm:text-sm md:text-base"
-            onClick={() => filterProduct("groceries")}
+            onClick={() => filterProduct('groceries')}
           >
             Groceries
           </button>
@@ -106,7 +110,8 @@ const Home = () => {
 
         <div className="flex flex-wrap gap-8 border border-rose-500  ">
           {ProductArray.map((obj) => (
-            <ProductCard obj={obj} key={obj.id} />
+            // <ProductCard obj={obj} key={obj.id} />
+            <AddedComponent obj={obj} key={obj.id}></AddedComponent>
           ))}
         </div>
       </div>
