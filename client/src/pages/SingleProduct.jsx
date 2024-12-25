@@ -37,7 +37,7 @@ const SingleProduct = () => {
   return (
     <section className={theme == 'light' ? lightTheme : darkTheme}>
       {idsArray.find((cartId) => cartId == id) != undefined ? (
-        <p className="text-red-500 bg-gray-800 text-xs absolute z-10 mt-8 ml-10 p-2 rounded ">
+        <p className="text-white bg-green-700 font-bold text-xs absolute z-10 mt-8 ml-10 p-2 rounded-lg shadow-md ">
           Added to cart
         </p>
       ) : (

@@ -1,9 +1,11 @@
+import React, { useEffect, useState, useContext } from 'react';
 import { useSelector } from 'react-redux';
 import CartRow from './CartRow';
+import { Theme } from '../../hooks/ThemeContext';
 
 const Cart = () => {
   let cartData = useSelector((state) => state.cart.items);
-
+  let { theme, setTheme } = useContext(Theme);
   // Calculate the total price
   const subtotal = cartData.reduce(
     (acc, item) => acc + item.obj.price * item.quantity,
@@ -13,8 +15,11 @@ const Cart = () => {
   const tax = 4; // Assume fixed tax
   const total = subtotal + shipping + tax;
 
+  let lightTheme = 'font-sans bg-white text-gray-700';
+  let darkTheme = 'font-sans bg-slate-800 text-white';
+
   return (
-    <div className="font-sans bg-white">
+    <div className={theme == 'light' ? lightTheme : darkTheme}>
       <div className="grid lg:grid-cols-3 gap-10 p-4">
         <div className="lg:col-span-2 space-y-4">
           {cartData.map((item) => (
@@ -23,10 +28,8 @@ const Cart = () => {
         </div>
 
         <div className="shadow-md p-6 lg:sticky lg:top-0 h-max">
-          <h3 className="text-lg font-bold text-gray-800 border-b pb-4">
-            Order Summary
-          </h3>
-          <ul className="text-gray-800 divide-y mt-4">
+          <h3 className="text-lg font-bold  border-b pb-4">Order Summary</h3>
+          <ul className=" divide-y mt-4">
             <li className="flex flex-wrap gap-4 text-sm py-3">
               Subtotal{' '}
               <span className="ml-auto font-bold">${subtotal.toFixed(2)}</span>

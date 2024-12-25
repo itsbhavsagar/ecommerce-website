@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import { removeCart, addQuantity, decreaseQuantity } from './CartSlice';
+import { Theme } from '../../hooks/ThemeContext';
 
 const CartRow = ({ cartObj }) => {
+  let { theme, setTheme } = useContext(Theme);
+
   let { thumbnail, price, rating, brand, title, id } = cartObj.obj;
   let { quantity } = cartObj;
 
@@ -23,8 +26,11 @@ const CartRow = ({ cartObj }) => {
     dispatch(addQuantity(id)); // Dispatch the increase quantity action
   };
 
+  let lightTheme = 'lg:col-span-2 bg-white divide-y';
+  let darkTheme = 'lg:col-span-2 bg-slate-800 shadow-md divide-y text-white';
+
   return (
-    <div className="lg:col-span-2 bg-white divide-y">
+    <div className={theme == 'light' ? lightTheme : darkTheme}>
       <div className="flex items-start max-sm:flex-col gap-4 py-4">
         <div className="h-36 shrink-0 bg-slate-200 rounded">
           <img
@@ -35,12 +41,12 @@ const CartRow = ({ cartObj }) => {
 
         <div className="flex items-start gap-4 w-full ">
           <div>
-            <h3 className="text-lg font-bold text-gray-800 mb-1">{title}</h3>
+            <h3 className="text-lg font-bold  mb-1">{title}</h3>
             <div className="space-y-1">
-              <h6 className="text-sm text-gray-800">
+              <h6 className="text-sm ">
                 Rating: <strong className="ml-2">{rating}</strong>
               </h6>
-              <h6 className="text-sm text-gray-800">
+              <h6 className="text-sm ">
                 Brand: <strong className="ml-2">{brand}</strong>
               </h6>
             </div>
@@ -116,7 +122,7 @@ const CartRow = ({ cartObj }) => {
                   ${(price * quantity).toFixed(2)}
                 </strike>
               </h4>
-              <h4 className="text-lg font-bold text-gray-800">
+              <h4 className="text-lg font-bold ">
                 ${itemTotalPrice.toFixed(2)}
               </h4>
             </div>
