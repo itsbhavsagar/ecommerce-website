@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Theme } from '../hooks/ThemeContext';
 import useGetSingleProduct from '../hooks/useGetSingleProduct';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { addCart } from '../features/cart/CartSlice';
 const SingleProduct = () => {
   let { theme, setTheme } = useContext(Theme);
 
@@ -14,6 +14,10 @@ const SingleProduct = () => {
   let obj = useGetSingleProduct(id);
 
   let idsArray = useSelector((state) => state.cart.ids);
+
+  const handleAddToCart = () => {
+    dispatch(addCart({ id, obj }));
+  };
 
   if (obj == null) {
     return <h1>....loading</h1>;
@@ -211,6 +215,7 @@ const SingleProduct = () => {
               <button
                 type="button"
                 className="inline-flex items-center justify-center rounded-md border-2 border-transparent  bg-none px-12 py-3 text-center text-base font-bold  transition-all duration-200 ease-in-out focus:shadow "
+                onClick={handleAddToCart}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
