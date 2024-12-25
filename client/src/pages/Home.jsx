@@ -4,6 +4,7 @@ import ShimmerUI from '../components/ShimmerUI';
 import { Theme } from '../hooks/ThemeContext';
 import useGetAllProducts from '../hooks/useGetAllProducts';
 import AddedProductInCart from '../features/cart/AddedProductInCart';
+import { useSelector } from 'react-redux';
 
 const Home = () => {
   let [allData, setAllData] = useState([]);
@@ -11,6 +12,9 @@ const Home = () => {
   let [searchText, setSearchText] = useState('');
 
   let arr = useGetAllProducts();
+
+  let idsArray = useSelector((state) => state.cart.ids);
+  console.log(idsArray);
 
   useEffect(() => {
     setAllData(arr);
@@ -109,10 +113,13 @@ const Home = () => {
         </div>
 
         <div className="flex flex-wrap gap-8 border border-rose-500  ">
-          {ProductArray.map((obj) => (
-            // <ProductCard obj={obj} key={obj.id} />
-            <AddedComponent obj={obj} key={obj.id}></AddedComponent>
-          ))}
+          {ProductArray.map((obj) =>
+            idsArray.find((id) => obj.id == id) != undefined ? (
+              <AddedComponent obj={obj} key={obj.id}></AddedComponent>
+            ) : (
+              <ProductCard obj={obj} key={obj.id} />
+            )
+          )}
         </div>
       </div>
     </>

@@ -1,16 +1,19 @@
-import React, { useEffect, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
-import { Theme } from "../hooks/ThemeContext";
-import useGetSingleProduct from "../hooks/useGetSingleProduct";
+import React, { useEffect, useState, useContext } from 'react';
+import { useParams } from 'react-router-dom';
+import { Theme } from '../hooks/ThemeContext';
+import useGetSingleProduct from '../hooks/useGetSingleProduct';
+import { useDispatch, useSelector } from 'react-redux';
 
 const SingleProduct = () => {
-  
-
-  let {theme, setTheme} = useContext(Theme)
+  let { theme, setTheme } = useContext(Theme);
 
   let { id } = useParams();
 
+  let dispatch = useDispatch();
+
   let obj = useGetSingleProduct(id);
+
+  let idsArray = useSelector((state) => state.cart.ids);
 
   if (obj == null) {
     return <h1>....loading</h1>;
@@ -28,13 +31,18 @@ const SingleProduct = () => {
     brand,
   } = obj;
 
-
-  let lightTheme = "py-12 sm:py-16 bg-slate-200 text-black duration-500"
-  let darkTheme = "py-12 sm:py-16 bg-gray-600 text-white "
-
+  let lightTheme = 'py-12 sm:py-16 bg-slate-200 text-black duration-500';
+  let darkTheme = 'py-12 sm:py-16 bg-gray-600 text-white ';
 
   return (
-    <section className={theme == "light" ? lightTheme : darkTheme}>
+    <section className={theme == 'light' ? lightTheme : darkTheme}>
+      {idsArray.find((cartId) => cartId == id) != undefined ? (
+        <p className="text-red-500 bg-gray-800 text-xs absolute z-10 mt-8 ml-10 p-2 rounded ">
+          Added to cart
+        </p>
+      ) : (
+        <></>
+      )}
       <div className="container mx-auto px-4">
         <nav className="flex">
           <ol role="list" className="flex items-center">
@@ -44,7 +52,6 @@ const SingleProduct = () => {
                   href="#"
                   className="rounded-md p-1 text-sm font-medium  focus:text-gray-900 focus:shadow hover:text-gray-800"
                 >
-                 
                   Home
                 </a>
               </div>
@@ -58,7 +65,6 @@ const SingleProduct = () => {
                     href="#"
                     className="rounded-md p-1 text-sm font-medium  focus:text-gray-900 focus:shadow hover:text-gray-800"
                   >
-                   
                     Products
                   </a>
                 </div>
@@ -134,9 +140,7 @@ const SingleProduct = () => {
 
           <div className="lg:col-span-2 lg:row-span-2 lg:row-end-2">
             <h2 className="mt-8 text-base ">{brand}</h2>
-            <h1 className="text-2xl font-bold  sm:text-3xl">
-              {title}
-            </h1>
+            <h1 className="text-2xl font-bold  sm:text-3xl">{title}</h1>
 
             <div className="mt-5 flex items-center">
               <div className="flex items-center">
@@ -196,9 +200,7 @@ const SingleProduct = () => {
                   ></path>
                 </svg>
               </div>
-              <p className="ml-2 text-sm font-medium ">
-                1,209 Reviews
-              </p>
+              <p className="ml-2 text-sm font-medium ">1,209 Reviews</p>
             </div>
 
             <div className="mt-10 flex flex-col items-center justify-between space-y-4 border-t border-b py-4 sm:flex-row sm:space-y-0">
@@ -277,7 +279,6 @@ const SingleProduct = () => {
                   title=""
                   className="border-b-2 border-gray-900 py-4 text-sm font-medium  hover:border-gray-400 hover:text-gray-800"
                 >
-                 
                   Description
                 </a>
 
@@ -288,7 +289,6 @@ const SingleProduct = () => {
                 >
                   Reviews
                   <span className="ml-2 block rounded-full  px-2 py-px text-xs font-bold ">
-                   
                     1,209
                   </span>
                 </a>
