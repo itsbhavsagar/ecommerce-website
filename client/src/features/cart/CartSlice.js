@@ -52,8 +52,8 @@ let cart = createSlice({
     },
 
     clearCart: (state) => {
-      state.items = [];
-      state.ids = [];
+      state.items.length = 0;
+      state.ids.length = 0;
     },
   },
 });

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import { React, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { Theme } from "../hooks/ThemeContext";
 import useGetSingleProduct from "../hooks/useGetSingleProduct";
@@ -17,6 +17,8 @@ const SingleProduct = () => {
 
   let idsArray = useSelector((state) => state.cart.ids);
 
+  let [showIndex, setShowIndex] = useState(null);
+
   const handleAddToCart = () => {
     dispatch(addCart({ id, obj }));
   };
@@ -31,9 +33,9 @@ const SingleProduct = () => {
     images,
     thumbnail,
     price,
-    rating,
+
     category,
-    tags,
+
     brand,
     reviews,
   } = obj;
@@ -151,61 +153,7 @@ const SingleProduct = () => {
 
             <div className="mt-5 flex items-center">
               <div className="flex items-center">
-                <svg
-                  className="block h-4 w-4 align-middle text-yellow-500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                    className=""
-                  ></path>
-                </svg>
-                <svg
-                  className="block h-4 w-4 align-middle text-yellow-500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                    className=""
-                  ></path>
-                </svg>
-                <svg
-                  className="block h-4 w-4 align-middle text-yellow-500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                    className=""
-                  ></path>
-                </svg>
-                <svg
-                  className="block h-4 w-4 align-middle text-yellow-500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                    className=""
-                  ></path>
-                </svg>
-                <svg
-                  className="block h-4 w-4 align-middle text-yellow-500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                    className=""
-                  ></path>
-                </svg>
+                <p>⭐️⭐️⭐️⭐️</p>
               </div>
               <p className="ml-2 text-sm font-medium ">1,209 Reviews</p>
             </div>
@@ -220,7 +168,7 @@ const SingleProduct = () => {
                 className="inline-flex items-center justify-center rounded-md border-2 hover:border-green-500 shadow-lg hover:shadow-green-400 hover:duration-700 px-12 py-3 text-center text-base font-bold"
                 onClick={handleAddToCart}
               >
-                <svg 
+                <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="shrink-0 mr-3 h-5 w-5 "
                   fill="none"
@@ -263,14 +211,16 @@ const SingleProduct = () => {
               </nav>
             </div>
 
-            <div className="mt-8 flow-root sm:mt-12 ">
-              <h1 className="mt-8 text-3xl font-bold">{title}</h1>
+            <div className="mt-8 flow-root sm:mt-12 w-4/5 ">
+              <h1 className="mt-8 text-3xl font-bold w-4/5">{title}</h1>
               <p className="mt-4">{description}</p>
             </div>
           </div>
-          <div className="reviewBox h-1/3 w-screen border-2 border-red-400 mt-2 flex flex-col items-center">
-            <Reviews></Reviews>
-          </div>
+        </div>
+        <div className="reviewBox border-2 border-red-400 m-2  flex flex-col items-center  justify-center">
+          {reviews.map((obj, idx) => (
+            <Reviews obj={obj} showIndex = {showIndex} setShowIndex = {setShowIndex} idx={idx}></Reviews>
+          ))}
         </div>
       </div>
     </section>
