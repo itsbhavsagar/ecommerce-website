@@ -1,10 +1,11 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { useParams } from 'react-router-dom';
-import { Theme } from '../hooks/ThemeContext';
-import useGetSingleProduct from '../hooks/useGetSingleProduct';
-import { useDispatch, useSelector } from 'react-redux';
-import { addCart } from '../features/cart/CartSlice';
-import Reviews from '../components/Reviews';
+import React, { useEffect, useState, useContext } from "react";
+import { useParams } from "react-router-dom";
+import { Theme } from "../hooks/ThemeContext";
+import useGetSingleProduct from "../hooks/useGetSingleProduct";
+import { useDispatch, useSelector } from "react-redux";
+import { addCart } from "../features/cart/CartSlice";
+import Reviews from "../components/Reviews";
+
 const SingleProduct = () => {
   let { theme, setTheme } = useContext(Theme);
 
@@ -37,11 +38,11 @@ const SingleProduct = () => {
     reviews,
   } = obj;
 
-  let lightTheme = 'py-12 sm:py-16 bg-slate-200 text-black duration-500';
-  let darkTheme = 'py-12 sm:py-16 bg-gray-600 text-white ';
+  let lightTheme = "py-12 sm:py-16 bg-slate-200 text-black duration-500";
+  let darkTheme = "py-12 sm:py-16 bg-gray-600 text-white ";
 
   return (
-    <section className={theme == 'light' ? lightTheme : darkTheme}>
+    <section className={theme == "light" ? lightTheme : darkTheme}>
       {idsArray.find((cartId) => cartId == id) != undefined ? (
         <p className="text-white bg-green-700 font-bold text-xs absolute z-10 mt-8 ml-10 p-2 rounded-lg shadow-md ">
           Added to cart
@@ -209,19 +210,19 @@ const SingleProduct = () => {
               <p className="ml-2 text-sm font-medium ">1,209 Reviews</p>
             </div>
 
-            <div className="mt-10 flex flex-col items-center justify-between space-y-4 border-t border-b py-4 sm:flex-row sm:space-y-0">
+            <div className="mt-10 flex flex-col items-center justify-between space-y-4 border-t-1 border-b border-gray-300  py-4 sm:flex-row sm:space-y-0">
               <div className="flex items-end">
                 <h1 className="text-3xl font-bold ">${price}</h1>
               </div>
 
               <button
                 type="button"
-                className="inline-flex items-center justify-center rounded-md border-2 border-transparent  bg-none px-12 py-3 text-center text-base font-bold  transition-all duration-200 ease-in-out focus:shadow "
+                className="inline-flex items-center justify-center rounded-md border-2 hover:border-green-500 shadow-lg hover:shadow-green-400 hover:duration-700 px-12 py-3 text-center text-base font-bold"
                 onClick={handleAddToCart}
               >
-                <svg
+                <svg 
                   xmlns="http://www.w3.org/2000/svg"
-                  className="shrink-0 mr-3 h-5 w-5"
+                  className="shrink-0 mr-3 h-5 w-5 "
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -239,12 +240,12 @@ const SingleProduct = () => {
           </div>
 
           <div className="lg:col-span-3">
-            <div className="border-b border-gray-300">
+            <div className="border-b border-gray-300 ">
               <nav className="flex gap-4">
                 <a
                   href="#"
                   title=""
-                  className="border-b-2 border-gray-900 py-4 text-sm font-medium  hover:border-gray-400 hover:text-gray-800"
+                  className="border-b-2 border-gray-900 py-4 text-sm font-medium  hover:border-gray-400 "
                 >
                   Description
                 </a>
@@ -267,8 +268,9 @@ const SingleProduct = () => {
               <p className="mt-4">{description}</p>
             </div>
           </div>
-
-          <Reviews reviews={reviews} />
+          <div className="reviewBox h-1/3 w-screen border-2 border-red-400 mt-2 flex flex-col items-center">
+            <Reviews></Reviews>
+          </div>
         </div>
       </div>
     </section>
