@@ -33,9 +33,7 @@ const SingleProduct = () => {
     images,
     thumbnail,
     price,
-
     category,
-
     brand,
     reviews,
   } = obj;
@@ -219,7 +217,12 @@ const SingleProduct = () => {
         </div>
         <div className="reviewBox border-2 border-red-400 m-2  flex flex-col items-center  justify-center">
           {reviews.map((obj, idx) => (
-            <Reviews obj={obj} showIndex = {showIndex} setShowIndex = {setShowIndex} idx={idx}></Reviews>
+            <Reviews
+              obj={obj}
+              showIndex={showIndex}
+              setShowIndex={setShowIndex}
+              idx={idx}
+            ></Reviews>
           ))}
         </div>
       </div>

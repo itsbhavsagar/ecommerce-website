@@ -32,14 +32,7 @@ const Cart = () => {
           {cartData.map((item) => (
             <CartRow cartObj={item} key={item.obj.id} />
           ))}
-          <div className="items-center text-center">
-            <button
-              className="btn btn-error py-2.5 w-3/6 "
-              onClick={handleClearCart}
-            >
-              Clear Cart
-            </button>
-          </div>
+         
         </div>
 
         <div className="shadow-md p-6 lg:sticky lg:top-0 h-max">
@@ -60,7 +53,14 @@ const Cart = () => {
               Total <span className="ml-auto">${total.toFixed(2)}</span>
             </li>
           </ul>
-
+ <div className="items-center text-center">
+            <button
+              className="btn btn-error py-2.5 w-3/6 "
+              onClick={handleClearCart}
+            >
+              Clear Cart
+            </button>
+          </div>
           <button
             type="button"
             className="mt-4 text-sm px-5 py-2.5 w-full bg-blue-600 hover:bg-blue-700 text-white rounded-md"
