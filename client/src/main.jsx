@@ -1,40 +1,39 @@
-import React, { lazy, Suspense } from "react";
-import { createRoot } from "react-dom/client";
-import "./index.css";
-import App from "./App.jsx";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Contact from "./pages/Contact";
-import About from "./pages/About";
-import Cart from "./features/cart/Cart.jsx";
-import Home from "./pages/Home.jsx";
-import ErrorPage from "./pages/ErrorPage.jsx";
-import SingleProduct from "./pages/SingleProduct.jsx";
+import React, { lazy, Suspense } from 'react';
+import { createRoot } from 'react-dom/client';
+import './index.css';
+import App from './App.jsx';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Contact from './pages/Contact';
+import About from './pages/About';
+import Cart from './features/cart/Cart.jsx';
+import Home from './pages/Home.jsx';
+import ErrorPage from './pages/ErrorPage.jsx';
+import SingleProduct from './pages/SingleProduct.jsx';
 // import Food from "./Food.jsx";
 
-let Food = lazy(() => import("./Food.jsx"));
+let Food = lazy(() => import('./Food.jsx'));
 
 let Router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <App />,
     children: [
-      { path: "/", element: <Home /> },
-      { path: "/about", element: <About /> },
+      { path: '/', element: <Home /> },
+      { path: '/about', element: <About /> },
       {
-        path: "/contact",
+        path: '/contact',
         element: <Contact />,
       },
       {
-        path: "/cart",
+        path: '/cart',
         element: <Cart />,
       },
-
       {
-        path: "/product/:id",
+        path: '/product/:id',
         element: <SingleProduct></SingleProduct>,
       },
       {
-        path: "/food",
+        path: '/food',
         element: (
           <Suspense fallback={<h1>....Loading</h1>}>
             <Food />
@@ -46,6 +45,6 @@ let Router = createBrowserRouter([
   },
 ]);
 
-createRoot(document.getElementById("root")).render(
+createRoot(document.getElementById('root')).render(
   <RouterProvider router={Router}></RouterProvider>
 );
