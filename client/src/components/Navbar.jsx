@@ -9,8 +9,6 @@ const Navbar = () => {
 
   let cartItem = useSelector((state) => state.cart.items);
 
-  console.log(cartItem);
-
   let handleThemeChange = () => {
     setTheme(theme == 'light' ? 'dark' : 'light');
     localStorage.setItem('Theme', 'light' ? 'dark' : 'light');
@@ -37,7 +35,6 @@ const Navbar = () => {
 
       <div className="flex m-4">
         <Link to="/cart">
-          {' '}
           Cart<sup className="text-red-600 font-bold"> {cartItem.length}</sup>
         </Link>
       </div>
