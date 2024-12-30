@@ -1,8 +1,8 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { useContext } from "react";
-import { Theme } from "../hooks/ThemeContext";
-import { useSelector } from "react-redux";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { Theme } from '../hooks/ThemeContext';
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
   let { theme, setTheme } = useContext(Theme);
@@ -12,16 +12,15 @@ const Navbar = () => {
   console.log(cartItem);
 
   let handleThemeChange = () => {
-    setTheme(theme == "light" ? "dark" : "light");
-    localStorage.setItem("Theme", "light" ? "dark" : "light")
+    setTheme(theme == 'light' ? 'dark' : 'light');
+    localStorage.setItem('Theme', 'light' ? 'dark' : 'light');
   };
 
-  let darkTheme = "navbar bg-gray-700  text-white duration-500  ";
-  let lightTheme = "navbar bg-slate-200  text-black duration-500  ";
+  let darkTheme = 'navbar bg-gray-700  text-white duration-500  ';
+  let lightTheme = 'navbar bg-slate-200  text-black duration-500  ';
 
   return (
-    <div className={theme == "light" ? lightTheme : darkTheme}>
-     
+    <div className={theme == 'light' ? lightTheme : darkTheme}>
       <div className="flex-1">
         <Link to="/" className="btn btn-ghost text-xl">
           ShopEase 🛍️
@@ -38,7 +37,7 @@ const Navbar = () => {
 
       <div className="flex m-4">
         <Link to="/cart">
-          {" "}
+          {' '}
           Cart<sup className="text-red-600 font-bold"> {cartItem.length}</sup>
         </Link>
       </div>
