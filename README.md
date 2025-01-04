@@ -1,6 +1,4 @@
-Here’s the complete `README.md` file content for your MERN eCommerce project:
 
----
 
 # **MERN eCommerce Project**
 
