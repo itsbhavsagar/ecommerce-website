@@ -1,43 +1,32 @@
 import http from 'http';
 import fs from 'fs';
 
-const htmlTemplate = fs.readFileSync('./index.html', 'UTF-8');
-const data = JSON.parse(fs.readFileSync('./Data.json', 'UTF-8')).products;
+let htmlFile = fs.readFileSync('./index.html', 'UTF-8');
+let data = JSON.parse(fs.readFileSync('./Data.json', 'UTF-8')).products;
 
-const handleRequest = (req, res) => {
-  try {
-    if (req.url === '/') {
-      res.setHeader('Content-Type', 'text/html');
-      res.end(htmlTemplate);
-    } else if (req.url.startsWith('/product')) {
-      const index = parseInt(req.url.split('/')[2], 10);
-      const product =
-        isNaN(index) || index < 0 || index >= data.length ? null : data[index];
+const server = http.createServer((req, res) => {
+  if (req.url == '/') {
+    res.setHeader('Content-Type', 'text/html');
+    res.end(htmlFile);
+  } else if (req.url == '/product') {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(data));
+  } else {
+    let url = req.url;
+    let index = +url.split('/')[2];
+    res.setHeader('Content-Type', 'text/html');
+    let modifiedHTML = htmlFile
+      .replace('**title**', data[index != undefined ? index : 0].title)
+      .replace('**category**', data[index != undefined ? index : 0].category)
+      .replace(
+        '**description**',
+        data[index != undefined ? index : 0].description
+      );
 
-      if (!product) {
-        res.writeHead(404, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ error: 'Product not found' }));
-      } else {
-        const dynamicHtml = htmlTemplate
-          .replace('**title**', product.title)
-          .replace('**category**', product.category);
-
-        res.setHeader('Content-Type', 'text/html');
-        res.end(dynamicHtml);
-      }
-    } else {
-      res.writeHead(404, { 'Content-Type': 'text/plain' });
-      res.end('404 Not Found');
-    }
-  } catch (error) {
-    console.error(error);
-    res.writeHead(500, { 'Content-Type': 'text/plain' });
-    res.end('Internal Server Error');
+    res.end(modifiedHTML);
   }
-};
-
-const server = http.createServer(handleRequest);
+});
 
 server.listen(8080, () => {
-  console.log('Server is running on port 8080');
+  console.log('server is running on 8080');
 });
