@@ -1,40 +1,28 @@
-import http from 'http';
 import fs from 'fs';
+
+import express from 'express';
 
 let htmlFile = fs.readFileSync('./index.html', 'UTF-8');
 let data = JSON.parse(fs.readFileSync('./Data.json', 'UTF-8')).products;
 
-const server = http.createServer((req, res) => {
-  if (req.url === '/') {
-    res.setHeader('Content-Type', 'text/html');
-    res.end(htmlFile);
-  } else if (req.url === '/product') {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(data));
-  } else if (/^\/product\/\d+$/.test(req.url)) {
-    let index = +req.url.split('/')[2];
-    let obj = data.find((obj) => obj.id == index);
+const server = express();
 
-    if (!obj) {
-      res.statusCode = 404;
-      res.end('<h1>Product not found</h1>');
-      return;
-    }
+server.get('/', (req, res) => {
+  res.sendFile('/Users/sagar/Desktop/ecommerce-website/server/index.html');
+});
 
-    res.setHeader('Content-Type', 'text/html');
-    let { title, category, description } = obj;
-    let modifiedHTML = htmlFile
-      .replace('**title**', title)
-      .replace('**category**', category)
-      .replace('**description**', description);
+server.get('/profile', (req, res) => {
+  res.send('/ profile is working');
+});
 
-    res.end(modifiedHTML);
-  } else {
-    res.statusCode = 404;
-    res.end('<h1>Page not found</h1>');
-  }
+server.get('/product', (req, res) => {
+  res.json(data);
+});
+
+server.get('/about', (req, res) => {
+  res.send('/ about is working');
 });
 
 server.listen(8080, () => {
-  console.log('Server is running on port 8080');
+  console.log(`${'http://localhost:8080/'}Server is running `);
 });
