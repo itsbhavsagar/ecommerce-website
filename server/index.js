@@ -1,25 +1,29 @@
 import fs from 'fs';
-
 import express from 'express';
+import path from 'path';
 
-let htmlFile = fs.readFileSync('./index.html', 'UTF-8');
-let data = JSON.parse(fs.readFileSync('./Data.json', 'UTF-8')).products;
+const app = express();
+const PORT = 8080;
 
-const server = express();
+const htmlFilePath = path.join(__dirname, 'index.html');
+const dataFilePath = path.join(__dirname, 'Data.json');
 
-server.get('/', (req, res) => {
-  res.sendFile(htmlFile);
+const htmlFile = fs.readFileSync(htmlFilePath, 'UTF-8');
+const data = JSON.parse(fs.readFileSync(dataFilePath, 'UTF-8')).products;
+
+app.get('/', (req, res) => {
+  res.sendFile(htmlFilePath);
 });
 
-server.get('/product', (req, res) => {
+app.get('/product', (req, res) => {
   res.json(data);
 });
 
-server.get('/query', (req, res) => {
+app.get('/query', (req, res) => {
   console.log(req.query);
   res.json(req.query);
 });
 
-server.listen(8080, () => {
-  console.log(`${'http://localhost:8080/'}Server is running `);
+app.listen(PORT, () => {
+  console.log(`Server is running at http://localhost:${PORT}/`);
 });
