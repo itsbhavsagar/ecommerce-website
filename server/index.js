@@ -26,6 +26,37 @@ app.post('/product', express.json(), (req, res) => {
   res.status(201).json(newProduct);
 });
 
+// ...existing code...
+
+// Get a single product by id
+app.get('/product/:id', (req, res) => {
+  const productId = req.params.id;
+  const product = data.find((product) => product.id === productId);
+  if (product) {
+    res.json(product);
+  } else {
+    res.status(404).send({ error: 'Product not found' });
+  }
+});
+
+// Update a product by id
+app.put('/product/:id', express.json(), (req, res) => {
+  const productId = req.params.id;
+  const updatedProduct = req.body;
+  let productIndex = data.findIndex((product) => product.id === productId);
+  if (productIndex !== -1) {
+    data[productIndex] = { ...data[productIndex], ...updatedProduct };
+    fs.writeFileSync(
+      dataFilePath,
+      JSON.stringify({ products: data }, null, 2),
+      'UTF-8'
+    );
+    res.json(data[productIndex]);
+  } else {
+    res.status(404).send({ error: 'Product not found' });
+  }
+});
+
 // Delete a product by id
 app.delete('/product/:id', (req, res) => {
   const productId = req.params.id;
