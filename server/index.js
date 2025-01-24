@@ -38,6 +38,19 @@ Server.get('/products/:id', (req, res) => {
   res.json(productData);
 });
 
+// Update
+
+// Update the data
+
+Server.put('/products/:id', (req, res) => {
+  let id = req.params.id;
+  let dataIdx = data.findIndex((obj) => obj.id == id);
+  data.splice(dataIdx, 1, { ...req.body, id: id });
+  res.send(req.body);
+});
+
+// Replce the data
+
 Server.listen(8080, () => {
   console.log('Server is running on port 8080');
 });
