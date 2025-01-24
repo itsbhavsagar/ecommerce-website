@@ -18,21 +18,25 @@ let auth = (req, res, next) => {
 
 Server.use(express.json());
 
-Server.get('/', (req, res) => {
-  res.send('htmlFile');
+// REST API's
+
+// Create
+Server.post('/products', (req, res) => {
+  let newData = req.body;
+  data.push(newData);
+  res.json(newData);
 });
 
-Server.post('/', auth, (req, res) => {
-  res.send('You are logged in');
+// Read
+Server.get('/products', (req, res) => {
+  res.json(data);
 });
 
-Server.get('/profile', (req, res) => {
-  res.send('This is the profile page');
+Server.get('/products/:id', (req, res) => {
+  let id = req.params.id;
+  let productData = data.find((obj) => obj.id == id);
+  res.json(productData);
 });
-
-// Server.get('/about', auth, (req, res) => {
-//   res.send('This is the about page');
-// });
 
 Server.listen(8080, () => {
   console.log('Server is running on port 8080');
