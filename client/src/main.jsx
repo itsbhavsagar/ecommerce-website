@@ -30,7 +30,7 @@ let Router = createBrowserRouter([
       },
       {
         path: '/product/:id',
-        element: <SingleProduct></SingleProduct>,
+        element: <SingleProduct />,
       },
       {
         path: '/food',

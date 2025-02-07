@@ -40,8 +40,7 @@ Server.get('/products/:id', (req, res) => {
 
 // Update
 
-// Update the data
-
+// Replce the data
 Server.put('/products/:id', (req, res) => {
   let id = req.params.id;
   let dataIdx = data.findIndex((obj) => obj.id == id);
@@ -49,9 +48,24 @@ Server.put('/products/:id', (req, res) => {
   res.send(req.body);
 });
 
-// Replce the data
+// Update the data
 
+Server.patch('/products/:id', (req, res) => {
+  let id = req.params.id;
+  let dataIdx = data.findIndex((obj) => obj.id == id);
+  data.splice(dataIdx, 1, { ...data[dataIdx], ...req.body });
+  res.send(data[dataIdx]);
+});
 
+// Delete the Data
+
+Server.delete('/products/:id', (req, res) => {
+  let id = req.params.id;
+  let dataIdx = data.findIndex((obj) => obj.id == id);
+  let prevObj = data[dataIdx];
+  data.splice(dataIdx, 1);
+  res.send(prevObj);
+});
 
 Server.listen(8080, () => {
   console.log('Server is running on port 8080');
