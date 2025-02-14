@@ -1,4 +1,6 @@
 import fs from 'fs';
+import User from '../models/users.models.js';
+import { error } from 'console';
 
 let htmlFile = fs.readFileSync('./index.html', 'UTF-8');
 let data = JSON.parse(
@@ -8,29 +10,31 @@ let data = JSON.parse(
   )
 ).users;
 
-let createUsers = (req, res) => {
-  let newData = req.body;
-  data.push(newData);
-  res.json(newData);
+let createUsers = async (req, res) => {
+  try {
+    let newData = req.body;
+    let newUser = new User(newData);
+    let data = await newUser.save();
+    res.send(data);
+  } catch (err) {
+    res.send({ result: fasle, error: err.message });
+    console.log(err);
+  }
 };
-
 let getAllUsers = (req, res) => {
   res.json(data);
 };
-
 let getUsersById = (req, res) => {
   let id = req.params.id;
   let UserData = data.find((obj) => obj.id == id);
   res.json(UserData);
 };
-
 let replaceUsers = (req, res) => {
   let id = req.params.id;
   let dataIdx = data.findIndex((obj) => obj.id == id);
   data.splice(dataIdx, 1, { ...req.body, id: id });
   res.send(req.body);
 };
-
 let updateUsers = (req, res) => {
   let id = req.params.id;
   let dataIdx = data.findIndex((obj) => obj.id == id);

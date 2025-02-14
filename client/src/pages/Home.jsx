@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import ProductCard from '../components/ProductCard';
 import ShimmerUI from '../components/ShimmerUI';
 import { Theme } from '../hooks/ThemeContext';
@@ -14,7 +14,6 @@ const Home = () => {
   let arr = useGetAllProducts();
 
   let idsArray = useSelector((state) => state.cart.ids);
-  console.log(idsArray);
 
   useEffect(() => {
     setAllData(arr);
@@ -48,48 +47,70 @@ const Home = () => {
   if (ProductArray.length == 0) {
     return <ShimmerUI />;
   }
-  let darkTheme =
-    'bg-gray-600 flex flex-wrap justify-center overflow-auto text-white duration-500';
-  let lightTheme =
-    'bg-slate-200 flex flex-wrap justify-center overflow-auto text-black duration-500';
+
+  // Dynamic Themes
+  let lightTheme = 'bg-slate-200 text-black duration-500';
+  let darkTheme = 'bg-gray-600 text-white duration-500';
 
   // Product Added Notification
   let AddedComponent = AddedProductInCart(ProductCard); // Its a HOC
 
   return (
-    <>
-      {/* FILTER BUTTONS */}
-
-      <div className={theme == 'light' ? lightTheme : darkTheme}>
-        <div className="btn-box flex-wrap sm:gap-8 space-x-4">
+    <div
+      className={`min-h-screen p-4 ${
+        theme === 'light' ? darkTheme : lightTheme
+      }`}
+    >
+      {/* SEARCH BAR AND FILTERS */}
+      <div className="flex flex-col items-center gap-4 md:flex-row md:justify-between">
+        {/* FILTER BUTTONS */}
+        <div className="flex flex-wrap gap-4">
           <button
-            className="btn  m-1  text-xs sm:text-sm md:text-base"
+            className={`btn ${
+              theme === 'light'
+                ? 'bg-gray-700 text-white '
+                : 'bg-slate-200 text-black hover:text-white'
+            }`}
             onClick={filterTopRated}
           >
             Top Rated
           </button>
           <button
-            className="btn   text-xs sm:text-sm md:text-base"
+            className={`btn ${
+              theme === 'light'
+                ? 'bg-gray-700 text-white '
+                : 'bg-slate-200 text-black hover:text-white'
+            }`}
             onClick={() => filterProduct('beauty')}
           >
             Beauty
           </button>
-
           <button
-            className="btn   text-xs sm:text-sm md:text-base"
+            className={`btn ${
+              theme === 'light'
+                ? 'bg-gray-700 text-white '
+                : 'bg-slate-200 text-black hover:text-white'
+            }`}
             onClick={() => filterProduct('fragrances')}
           >
             Fragrances
           </button>
           <button
-            className="btn   text-xs sm:text-sm md:text-base"
+            className={`btn ${
+              theme === 'light'
+                ? 'bg-gray-700 text-white '
+                : 'bg-slate-200 text-black hover:text-white'
+            }`}
             onClick={() => filterProduct('furniture')}
           >
             Furniture
           </button>
-
           <button
-            className="btn  text-xs sm:text-sm md:text-base"
+            className={`btn ${
+              theme === 'light'
+                ? 'bg-gray-700 text-white '
+                : 'bg-slate-200 text-black hover:text-white'
+            }`}
             onClick={() => filterProduct('groceries')}
           >
             Groceries
@@ -97,7 +118,7 @@ const Home = () => {
         </div>
 
         {/* SEARCH BAR */}
-        <div className="items-center flex flex-1 place-content-center">
+        <div className="flex items-center gap-2">
           <input
             value={searchText}
             onChange={(event) => {
@@ -105,24 +126,36 @@ const Home = () => {
             }}
             type="text"
             placeholder="Search"
-            className="input input-bordered border-red-700 w-3/5 text-white"
+            className={`input input-bordered w-64 ${
+              theme === 'light'
+                ? 'bg-gray-700 text-white border-gray-500 '
+                : 'bg-slate-200 text-black border-slate-500'
+            }`}
           />
-          <button className="btn flex btn-warning m-2" onClick={searchProduct}>
+          <button
+            className={`btn ${
+              theme === 'light'
+                ? 'bg-yellow-600 text-white '
+                : 'bg-yellow-300 text-black hover:text-white'
+            }`}
+            onClick={searchProduct}
+          >
             Search
           </button>
         </div>
-
-        <div className="flex flex-wrap gap-8 border border-rose-500  ">
-          {ProductArray.map((obj) =>
-            idsArray.find((id) => obj.id == id) != undefined ? (
-              <AddedComponent obj={obj} key={obj.id}></AddedComponent>
-            ) : (
-              <ProductCard obj={obj} key={obj.id} />
-            )
-          )}
-        </div>
       </div>
-    </>
+
+      {/* PRODUCT GRID */}
+      <div className="grid grid-cols-1 gap-8 mt-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {ProductArray.map((obj) =>
+          idsArray.find((id) => obj.id == id) !== undefined ? (
+            <AddedComponent obj={obj} key={obj.id}></AddedComponent>
+          ) : (
+            <ProductCard obj={obj} key={obj.id} />
+          )
+        )}
+      </div>
+    </div>
   );
 };
 

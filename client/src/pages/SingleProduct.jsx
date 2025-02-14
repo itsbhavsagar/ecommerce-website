@@ -1,10 +1,10 @@
-import { React, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
-import { Theme } from "../hooks/ThemeContext";
-import useGetSingleProduct from "../hooks/useGetSingleProduct";
-import { useDispatch, useSelector } from "react-redux";
-import { addCart } from "../features/cart/CartSlice";
-import Reviews from "../components/Reviews";
+import { React, useState, useContext } from 'react';
+import { useParams } from 'react-router-dom';
+import { Theme } from '../hooks/ThemeContext';
+import useGetSingleProduct from '../hooks/useGetSingleProduct';
+import { useDispatch, useSelector } from 'react-redux';
+import { addCart } from '../features/cart/CartSlice';
+import Reviews from '../components/Reviews';
 
 const SingleProduct = () => {
   let { theme, setTheme } = useContext(Theme);
@@ -38,11 +38,11 @@ const SingleProduct = () => {
     reviews,
   } = obj;
 
-  let lightTheme = "py-12 sm:py-16 bg-slate-200 text-black duration-500";
-  let darkTheme = "py-12 sm:py-16 bg-gray-600 text-white ";
+  let lightTheme = 'py-12 sm:py-16 bg-slate-200 text-black duration-500';
+  let darkTheme = 'py-12 sm:py-16 bg-gray-600 text-white ';
 
   return (
-    <section className={theme == "light" ? lightTheme : darkTheme}>
+    <section className={theme == 'dark' ? lightTheme : darkTheme}>
       {idsArray.find((cartId) => cartId == id) != undefined ? (
         <p className="text-white bg-green-700 font-bold text-xs absolute z-10 mt-8 ml-10 p-2 rounded-lg shadow-md ">
           Added to cart
