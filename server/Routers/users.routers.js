@@ -14,8 +14,8 @@ let Router = express.Router();
 Router.post('/', createUser)
   .get('/', allUserData)
   .get('/:id', getOneUser)
-  .put('/:id', replaceUser)
-  .patch('/:id', updateUser)
+  .put('/', replaceUser)
+  .patch('/', updateUser)
   .delete('/:id', deleteUser);
 
 export default Router;

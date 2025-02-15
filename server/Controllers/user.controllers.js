@@ -27,32 +27,38 @@ let allUserData = async (req, res) => {
   res.send(data);
 };
 
-let getOneUser = (req, res) => {
-  let id = req.params.id;
-  let UserData = data.find((obj) => obj.id == id);
-  res.json(UserData);
+let getOneUser = async (req, res) => {
+  // let id = req.params.id;
+  // let data = await User.findById(id);
+  let { email } = req.body;
+  let data = await User.findOne({ email: email });
+  res.send(data);
 };
 
-let replaceUser = (req, res) => {
-  let id = req.params.id;
-  let dataIdx = data.findIndex((obj) => obj.id == id);
-  data.splice(dataIdx, 1, { ...req.body, id: id });
-  res.send(req.body);
+let replaceUser = async (req, res) => {
+  let { email } = req.body;
+  let data = await User.findOneAndReplace(
+    { email: email },
+    { ...req.body },
+    { new: true }
+  );
+  res.send(data);
 };
 
-let updateUser = (req, res) => {
-  let id = req.params.id;
-  let dataIdx = data.findIndex((obj) => obj.id == id);
-  data.splice(dataIdx, 1, { ...data[dataIdx], ...req.body });
-  res.send(data[dataIdx]);
+let updateUser = async (req, res) => {
+  let { email } = req.body;
+  let data = await User.findOneAndUpdate(
+    { email: email },
+    { ...req.body },
+    { new: true }
+  );
+  res.send(data);
 };
 
-let deleteUser = (req, res) => {
+let deleteUser = async (req, res) => {
   let id = req.params.id;
-  let dataIdx = data.findIndex((obj) => obj.id == id);
-  let prevObj = data[dataIdx];
-  data.splice(dataIdx, 1);
-  res.send(prevObj);
+  let data = await User.findByIdAndDelete(id);
+  res.send(data);
 };
 
 export {
