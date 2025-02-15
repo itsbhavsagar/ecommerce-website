@@ -10,7 +10,7 @@ let data = JSON.parse(
   )
 ).users;
 
-let createUsers = async (req, res) => {
+let createUser = async (req, res) => {
   try {
     let newData = req.body;
     let newUser = new User(newData);
@@ -21,28 +21,33 @@ let createUsers = async (req, res) => {
     console.log(err);
   }
 };
-let getAllUsers = (req, res) => {
-  res.json(data);
+
+let allUserData = async (req, res) => {
+  let data = await User.find({});
+  res.send(data);
 };
-let getUsersById = (req, res) => {
+
+let getOneUser = (req, res) => {
   let id = req.params.id;
   let UserData = data.find((obj) => obj.id == id);
   res.json(UserData);
 };
-let replaceUsers = (req, res) => {
+
+let replaceUser = (req, res) => {
   let id = req.params.id;
   let dataIdx = data.findIndex((obj) => obj.id == id);
   data.splice(dataIdx, 1, { ...req.body, id: id });
   res.send(req.body);
 };
-let updateUsers = (req, res) => {
+
+let updateUser = (req, res) => {
   let id = req.params.id;
   let dataIdx = data.findIndex((obj) => obj.id == id);
   data.splice(dataIdx, 1, { ...data[dataIdx], ...req.body });
   res.send(data[dataIdx]);
 };
 
-let deleteUsers = (req, res) => {
+let deleteUser = (req, res) => {
   let id = req.params.id;
   let dataIdx = data.findIndex((obj) => obj.id == id);
   let prevObj = data[dataIdx];
@@ -51,10 +56,10 @@ let deleteUsers = (req, res) => {
 };
 
 export {
-  createUsers,
-  getAllUsers,
-  getUsersById,
-  replaceUsers,
-  updateUsers,
-  deleteUsers,
+  createUser,
+  allUserData,
+  getOneUser,
+  replaceUser,
+  updateUser,
+  deleteUser,
 };
