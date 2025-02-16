@@ -1,14 +1,6 @@
-import fs from 'fs';
 import User from '../models/users.models.js';
-import { error } from 'console';
 
-let htmlFile = fs.readFileSync('./index.html', 'UTF-8');
-let data = JSON.parse(
-  fs.readFileSync(
-    '/Users/sagar/Desktop/ecommerce-website/server/Data.json',
-    'UTF-8'
-  )
-).users;
+import bcrypt from 'bcrypt';
 
 let createUser = async (req, res) => {
   try {
@@ -61,6 +53,50 @@ let deleteUser = async (req, res) => {
   res.send(data);
 };
 
+// SIGN UP USER
+
+let signUpUser = async (req, res) => {
+  let { userName, email, password } = req.body;
+
+  try {
+    let user = await User.findOne({ email: email });
+    if (user) {
+      // If user exists don't create a new user
+      return res.send({ res: false, message: 'User already exists' });
+    }
+    let salt = await bcrypt.genSalt(10);
+    let hashedPassword = await bcrypt.hash(password, salt);
+    let newUser = new User({
+      userName,
+      email,
+      password: hashedPassword,
+    });
+    let data = await newUser.save(); // Save newUser to database
+    return res.send(data);
+  } catch (err) {
+    res.send({ res: false, message: err.message });
+  }
+};
+
+// LOGIN USER
+
+let loginUser = async (req, res) => {
+  let { userName, email, password } = req.body;
+  try {
+    let user = await User.findOne({ email: email }); // Find user by email
+    if (!user) {
+      return res.send({ res: false, message: 'User does not exist' });
+    }
+    let validPassword = await bcrypt.compare(password, user.password);
+    if (!validPassword) {
+      return res.send({ res: false, message: 'Invalid password' });
+    }
+    return res.send({ res: true, message: 'Login successful' });
+  } catch (err) {
+    res.send({ res: false, message: err.message });
+  }
+};
+
 export {
   createUser,
   allUserData,
@@ -68,4 +104,6 @@ export {
   replaceUser,
   updateUser,
   deleteUser,
+  signUpUser,
+  loginUser,
 };
