@@ -9,7 +9,7 @@ let createUser = async (req, res) => {
     let data = await newUser.save();
     res.send(data);
   } catch (err) {
-    res.send({ result: fasle, error: err.message });
+    res.send({ result: false, error: err.message });
     console.log(err);
   }
 };
@@ -85,14 +85,17 @@ let loginUser = async (req, res) => {
   try {
     let user = await User.findOne({ email: email }); // Find user by email
     if (!user) {
+      // If user does not exist return error message
       return res.send({ res: false, message: 'User does not exist' });
     }
-    let validPassword = await bcrypt.compare(password, user.password);
+    let validPassword = await bcrypt.compare(password, user.password); // Compare password
     if (!validPassword) {
+      // If password is invalid return error message
       return res.send({ res: false, message: 'Invalid password' });
     }
     return res.send({ res: true, message: 'Login successful' });
   } catch (err) {
+    // If there is an error return error message
     res.send({ res: false, message: err.message });
   }
 };
