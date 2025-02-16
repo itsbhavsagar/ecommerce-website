@@ -188,6 +188,14 @@ Payment Gateway Integration: Add a payment gateway like Stripe or PayPal.
 
 ### Special thanks to the creators of React, Tailwind CSS, Node.js, Express, and MongoDB for making this project possible.
 
+## Hacktoberfest 2025
+
+🎉 This project is participating in **Hacktoberfest 2025**! 🎉
+
+We welcome contributions of all types, whether you're fixing bugs, improving documentation, or adding new features. Check out our [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines and [Issues](https://github.com/yourusername/ecommerce-website/issues) labeled `hacktoberfest` to get started.
+
+Happy hacking! 🚀
+
 Feel free to fork this repo and improve it! Happy coding! 😊
 
 ---
