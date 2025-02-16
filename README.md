@@ -1,10 +1,13 @@
 # MERN eCommerce Website
 
+![Open Source](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)
+
 A demo eCommerce platform built using the MERN stack. This project includes essential eCommerce functionality like user authentication, product listings, and cart management.
 
 ## Purpose
 
 This project is for learning purposes and demonstrates how to build a full-stack eCommerce website using:
+
 - React (with Vite for a faster build process)
 - Tailwind CSS with Daisy UI components for styling
 - Node.js and Express.js for the backend
@@ -20,18 +23,21 @@ This project is for learning purposes and demonstrates how to build a full-stack
 ## Tech Stack
 
 ### Frontend
+
 - React (with Vite)
 - Tailwind CSS
 - Daisy UI components
 - Axios for API calls
 
 ### Backend
+
 - Node.js
 - Express.js
 - MongoDB (with Mongoose)
 - JWT for authentication
 
 ### Deployment
+
 - **Frontend**: Hosted on Vercel
 - **Backend**: Hosted on [platform] (e.g., Vercel/Heroku)
 - **Database**: MongoDB Atlas
@@ -39,10 +45,12 @@ This project is for learning purposes and demonstrates how to build a full-stack
 ## Installation
 
 ### Prerequisites
+
 - Node.js and npm installed
 - MongoDB database (local or hosted on MongoDB Atlas)
 
 ### Clone the Repository
+
 ```bash
 git clone https://github.com/yourusername/ecommerce-website.git
 cd ecommerce-website
@@ -51,41 +59,53 @@ cd ecommerce-website
 ## Frontend Setup
 
 ### 1. Navigate to the client folder:
+
 ```bash
 cd client
 ```
+
 ### 2. Install dependencies:
+
 ```bash
 npm install
 ```
+
 ### 3. Start the development server:
+
 ```bash
 npm run dev
 ```
 
-
 ## Backend Setup
+
 ### 1. Navigate to the server folder:
+
 ```bash
 cd server
 ```
+
 ### 2. Install dependencies:
+
 ```bash
 npm install
 ```
+
 ### 3. Create a `.env` file in the server folder using the provided `.env.example` file:
-``` ini
+
+```ini
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 ```
+
 ### 4. Start the backend server:
+
 ```bash
 npm start
 ```
 
 ## Running the App
 
-- **Frontend**: Runs on `http://localhost:5173/` (default Vite port)  
+- **Frontend**: Runs on `http://localhost:5173/` (default Vite port)
 - **Backend**: Runs on `http://localhost:5000/` (default Express port)
 
 ---
@@ -93,15 +113,18 @@ npm start
 ## API Endpoints
 
 ### Auth
+
 - `POST /api/auth/register`: Register a new user
 - `POST /api/auth/login`: Log in a user
 - `POST /api/auth/logout`: Log out a user
 
 ### Products
+
 - `GET /api/products`: Fetch all products
 - `GET /api/products/:id`: Fetch a single product
 
 ### Cart
+
 - `POST /api/cart`: Add items to cart
 - `DELETE /api/cart/:id`: Remove items from cart
 
@@ -134,6 +157,7 @@ MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 
 ```
+
 ## Folder Structure
 
 ```ecommerce-website/
@@ -152,21 +176,18 @@ JWT_SECRET=your_jwt_secret
 ├── LICENSE               # License file
 ```
 
-
 ## Features to Add (Future Contributions)
+
 ### Looking for contributors to add the following features:
 
 Search and Filter Products: Improve the product browsing experience.
 Wishlist Functionality: Allow users to save products for later.
 Payment Gateway Integration: Add a payment gateway like Stripe or PayPal.
 
-
 ## Acknowledgements
+
 ### Special thanks to the creators of React, Tailwind CSS, Node.js, Express, and MongoDB for making this project possible.
 
 Feel free to fork this repo and improve it! Happy coding! 😊
 
-
-
 ---
-
