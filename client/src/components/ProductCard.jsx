@@ -33,7 +33,7 @@ let ProductCard = ({ obj }) => {
   return (
     <>
       <div
-        className={theme == 'dark' ? lightTheme : darkTheme}
+        className={theme == 'light' ? lightTheme : darkTheme}
         onClick={handleClick}
       >
         <Link to="#">

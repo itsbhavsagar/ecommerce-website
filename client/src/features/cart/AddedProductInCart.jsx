@@ -1,13 +1,11 @@
-import React from 'react';
-
-const AddedProductInCart = (Component) => {
-  return (props) => {
+const AddedProductInCart = (WrappedComponent) => {
+  return function WithAddedToCartMessage(props) {
     return (
       <div className="relative">
-        <p className="text-white bg-green-700 text-xs font-bold shadow-md absolute z-10 mt-2 ml-10 p-2 rounded ">
+        <p className="absolute top-2 left-10 z-10 text-xs font-bold text-white bg-green-700 p-2 rounded shadow-md">
           Added to cart
         </p>
-        <Component {...props}></Component>
+        <WrappedComponent {...props} />
       </div>
     );
   };

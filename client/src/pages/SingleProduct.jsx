@@ -1,4 +1,4 @@
-import { React, useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { Theme } from '../hooks/ThemeContext';
 import useGetSingleProduct from '../hooks/useGetSingleProduct';
@@ -7,7 +7,7 @@ import { addCart } from '../features/cart/CartSlice';
 import Reviews from '../components/Reviews';
 
 const SingleProduct = () => {
-  let { theme, setTheme } = useContext(Theme);
+  let { theme } = useContext(Theme);
 
   let { id } = useParams();
 
@@ -42,7 +42,7 @@ const SingleProduct = () => {
   let darkTheme = 'py-12 sm:py-16 bg-gray-600 text-white ';
 
   return (
-    <section className={theme == 'dark' ? lightTheme : darkTheme}>
+    <section className={theme == 'light' ? lightTheme : darkTheme}>
       {idsArray.find((cartId) => cartId == id) != undefined ? (
         <p className="text-white bg-green-700 font-bold text-xs absolute z-10 mt-8 ml-10 p-2 rounded-lg shadow-md ">
           Added to cart
@@ -221,7 +221,7 @@ const SingleProduct = () => {
               obj={obj}
               showIndex={showIndex}
               setShowIndex={setShowIndex}
-              idx={idx}
+              key={idx}
             ></Reviews>
           ))}
         </div>
