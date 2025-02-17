@@ -79,21 +79,24 @@ let signUpUser = async (req, res) => {
 };
 
 // LOGIN USER
-
 let loginUser = async (req, res) => {
-  let { userName, email, password } = req.body;
+  let { email, password } = req.body;
   try {
     let user = await User.findOne({ email: email }); // Find user by email
     if (!user) {
       // If user does not exist return error message
-      return res.send({ res: false, message: 'User does not exist' });
+      return res.send({
+        res: false,
+        message: 'User does not exist // Email Id & Password is incorrect!!',
+      });
     }
-    let validPassword = await bcrypt.compare(password, user.password); // Compare password
-    if (!validPassword) {
+    let result = await bcrypt.compare(password, user.password); // Compare password
+    if (!result) {
       // If password is invalid return error message
       return res.send({ res: false, message: 'Invalid password' });
+    } else {
+      return res.send({ res: true, message: 'Login successful' });
     }
-    return res.send({ res: true, message: 'Login successful' });
   } catch (err) {
     // If there is an error return error message
     res.send({ res: false, message: err.message });
