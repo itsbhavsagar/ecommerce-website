@@ -42,7 +42,7 @@ const SingleProduct = () => {
   let darkTheme = 'py-12 sm:py-16 bg-gray-600 text-white ';
 
   return (
-    <section className={theme == 'light' ? lightTheme : darkTheme}>
+    <section className={theme == 'light' ? darkTheme : lightTheme}>
       {idsArray.find((cartId) => cartId == id) != undefined ? (
         <p className="text-white bg-green-700 font-bold text-xs absolute z-10 mt-8 ml-10 p-2 rounded-lg shadow-md ">
           Added to cart

@@ -9,6 +9,8 @@ import Cart from './features/cart/Cart.jsx';
 import Home from './pages/Home.jsx';
 import ErrorPage from './pages/ErrorPage.jsx';
 import SingleProduct from './pages/SingleProduct.jsx';
+import Signup from './pages/SignUp.jsx';
+import Login from './pages/Login.jsx';
 // import Food from "./Food.jsx";
 
 let Food = lazy(() => import('./Food.jsx'));
@@ -39,6 +41,14 @@ let Router = createBrowserRouter([
             <Food />
           </Suspense>
         ),
+      },
+      {
+        path: '/login',
+        element: <Login />,
+      },
+      {
+        path: '/Signup',
+        element: <Signup />,
       },
     ],
     errorElement: <ErrorPage></ErrorPage>,

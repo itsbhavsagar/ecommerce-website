@@ -58,7 +58,7 @@ const Home = () => {
   return (
     <div
       className={`min-h-screen p-4 ${
-        theme === 'dark' ? darkTheme : lightTheme
+        theme === 'light' ? darkTheme : lightTheme
       }`}
     >
       {/* SEARCH BAR AND FILTERS */}
@@ -67,7 +67,7 @@ const Home = () => {
         <div className="flex flex-wrap gap-4">
           <button
             className={`btn ${
-              theme === 'dark'
+              theme === 'light'
                 ? 'bg-gray-700 text-white '
                 : 'bg-slate-200 text-black hover:text-white'
             }`}
@@ -77,7 +77,7 @@ const Home = () => {
           </button>
           <button
             className={`btn ${
-              theme === 'dark'
+              theme === 'light'
                 ? 'bg-gray-700 text-white '
                 : 'bg-slate-200 text-black hover:text-white'
             }`}
@@ -87,7 +87,7 @@ const Home = () => {
           </button>
           <button
             className={`btn ${
-              theme === 'dark'
+              theme === 'light'
                 ? 'bg-gray-700 text-white '
                 : 'bg-slate-200 text-black hover:text-white'
             }`}
@@ -97,7 +97,7 @@ const Home = () => {
           </button>
           <button
             className={`btn ${
-              theme === 'dark'
+              theme === 'light'
                 ? 'bg-gray-700 text-white '
                 : 'bg-slate-200 text-black hover:text-white'
             }`}
@@ -107,7 +107,7 @@ const Home = () => {
           </button>
           <button
             className={`btn ${
-              theme === 'dark'
+              theme === 'light'
                 ? 'bg-gray-700 text-white '
                 : 'bg-slate-200 text-black hover:text-white'
             }`}
@@ -127,7 +127,7 @@ const Home = () => {
             type="text"
             placeholder="Search"
             className={`input input-bordered w-64 ${
-              theme === 'dark'
+              theme === 'light'
                 ? 'bg-gray-700 text-white border-gray-500 '
                 : 'bg-slate-200 text-black border-slate-500'
             }`}

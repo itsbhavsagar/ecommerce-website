@@ -23,8 +23,8 @@ const Cart = () => {
   let darkTheme = 'font-sans bg-slate-800 text-white';
 
   return (
-    <div className={theme == 'light' ? lightTheme : darkTheme}>
-      <div className="grid lg:grid-cols-3 gap-10 p-4">
+    <div className={theme == 'light' ? darkTheme : lightTheme}>
+      <div className="grid lg:grid-cols-3 gap-10 p-4 h-[calc(100vh-4rem)]">
         <div className="lg:col-span-2 space-y-4">
           {cartData.map((item) => (
             <CartRow cartObj={item} key={item.obj.id} />
