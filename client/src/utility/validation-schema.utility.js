@@ -1,5 +1,3 @@
-import React from 'react';
-
 import * as Yup from 'yup';
 
 import YupPassword from 'yup-password';
@@ -10,6 +8,10 @@ const loginSchema = Yup.object({
   password: Yup.string().password().required(),
 });
 
-const signUpSchema = Yup.object({});
+const signUpSchema = Yup.object({
+  userName: Yup.string().required().trim(),
+  email: Yup.string().email().required('Email cannot be empty!').trim(),
+  password: Yup.string().password().required(),
+});
 
-export { loginSchema };
+export { loginSchema, signUpSchema };

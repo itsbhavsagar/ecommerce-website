@@ -8,15 +8,11 @@ const Login = () => {
       email: '',
       password: '',
     },
-
     validationSchema: loginSchema,
-
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: (values, action) => {
+      action.resetForm();
     },
   });
-
-  console.log(formik);
 
   return (
     <>
