@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 const { Schema, model } = mongoose;
 
 const Address = new Schema({
-  houseNumber: { type: String, default: 0 },
+  houseNumber: { type: String, default: '0' },
   city: { type: String, required: true },
   pincode: { type: Number, required: true },
 });

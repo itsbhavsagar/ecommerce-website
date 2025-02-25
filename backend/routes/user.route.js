@@ -1,4 +1,5 @@
 import express from 'express';
+import auth from '../middlewares/auth.middleware.js';
 import {
   login,
   signup,
@@ -9,7 +10,7 @@ const Router = express.Router();
 
 Router.post('/signup', signup)
   .post('/login', login)
-  .get('/getUser', getuser)
+  .get('/getuser', auth, getuser)
   .patch('/update', updateuser);
 
 export default Router;

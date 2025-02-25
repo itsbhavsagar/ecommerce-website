@@ -1,3 +1,4 @@
+import { response } from 'express';
 import User from '../model/user.model.js';
 
 const tokenGeneration = async function (user) {
@@ -5,7 +6,36 @@ const tokenGeneration = async function (user) {
   return token;
 };
 
-const login = (req, res) => {};
+const login = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const existingUser = await User.findOne({ email: email });
+
+    if (!existingUser) {
+      return res
+        .status(404)
+        .send({ result: false, message: 'User does not exist!' });
+    }
+
+    const response = await existingUser.checkPassword(password);
+    if (response) {
+      const token = await tokenGeneration(existingUser);
+      const option = { httpOnly: true, secure: true };
+
+      return res
+        .status(201)
+        .cookie('Token', token, option)
+        .send({ result: true, message: 'Login Successful' });
+    } else {
+      return res
+        .status(401)
+        .send({ result: false, message: 'Password is incorrect' });
+    }
+  } catch (err) {
+    return res.send({ result: false, message: err.message });
+  }
+};
 
 const signup = async (req, res) => {
   const { email, password, userName } = req.body;
@@ -33,7 +63,9 @@ const signup = async (req, res) => {
   }
 };
 
-const getuser = (req, res) => {};
+const getuser = (req, res) => {
+  res.send('ok');
+};
 
 const updateuser = (req, res) => {};
 
