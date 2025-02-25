@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 const { Schema, model } = mongoose;
 
@@ -17,20 +18,24 @@ const UserSchema = new Schema({
   address: { type: [Address], default: [] },
 });
 
-UserSchema.pre(save, async function (next) {
+UserSchema.pre('save', async function (next) {
   let user = this;
   // only hash the password if it has been modified (or is new)
   if (!user.isModified('password')) return next();
 
   // Geneate a salt
   let salt = await bcrypt.genSalt(10);
-  let hashedPassword = await bcrypt.hashPassword(user.password, salt);
+  let hashedPassword = await bcrypt.hash(user.password, salt);
   user.password = hashedPassword;
   next();
 });
 
 UserSchema.methods.checkPassword = async function (userPassword) {
   return await bcrypt.compare(userPassword, this.password);
+};
+
+UserSchema.methods.generateToken = async function () {
+  return jwt.sign({ id: this._id, email: this.email }, process.env.PRIVATE_KEY);
 };
 
 const User = model('User', UserSchema);
