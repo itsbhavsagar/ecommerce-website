@@ -19,8 +19,8 @@ const Cart = () => {
     dispatch(clearCart(clearCart));
   };
 
-  let lightTheme = 'font-sans bg-white text-gray-700';
-  let darkTheme = 'font-sans bg-slate-800 text-white';
+  let lightTheme = 'font-sans bg-white text-black';
+  let darkTheme = 'font-sans bg-slate-700 text-white';
 
   return (
     <div className={theme == 'light' ? darkTheme : lightTheme}>

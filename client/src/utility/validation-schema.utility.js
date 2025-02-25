@@ -8,10 +8,10 @@ const loginSchema = Yup.object({
   password: Yup.string().password().required(),
 });
 
-const signUpSchema = Yup.object({
+const signupSchema = Yup.object({
   userName: Yup.string().required().trim(),
   email: Yup.string().email().required('Email cannot be empty!').trim(),
   password: Yup.string().password().required(),
 });
 
-export { loginSchema, signUpSchema };
+export { loginSchema, signupSchema };

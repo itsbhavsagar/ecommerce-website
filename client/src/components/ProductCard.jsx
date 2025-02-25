@@ -1,71 +1,72 @@
-import { Navigate, useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { Theme } from '../hooks/ThemeContext';
 import { useDispatch } from 'react-redux';
 import { addCart } from '../features/cart/CartSlice';
 
-let ProductCard = ({ obj }) => {
-  let { images, title, price, brand, id } = obj;
+const ProductCard = ({ obj }) => {
+  const { images, title, price, brand, id } = obj;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { theme } = useContext(Theme);
 
-  let dispatch = useDispatch();
-
-  let Navigate = useNavigate();
-  let handleClick = () => {
-    Navigate(`/product/${id}`);
-  };
-
-  let handleAddCart = (event) => {
+  const handleClick = () => navigate(`/product/${id}`);
+  const handleAddCart = (event) => {
     event.preventDefault();
     event.stopPropagation();
     dispatch(addCart(obj));
-    console.log('Buy now clicked');
+    console.log('Added to cart');
   };
 
-  let { theme } = useContext(Theme);
-
-  let lightTheme =
-    'w-72 bg-slate-200 shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl items-center ml-8 text-black';
-
-  let darkTheme =
-    'w-72 bg-gray-700 shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl items-center ml-8 text-white';
-
   return (
-    <>
-      <div
-        className={theme == 'light' ? darkTheme : lightTheme}
-        onClick={handleClick}
-      >
-        <Link to="#">
-          <img
-            src={images[0]}
-            alt="Product"
-            className="h-52 w-72 object-scale-down rounded-t-xl"
-          />
-          <div className="px-4 py-3 w-72">
-            <span className="text-gray-400 mr-3 uppercase text-xs">
-              {brand}
-            </span>
-            <p className="text-lg font-bold truncate block capitalize">
-              {title}
-            </p>
-            <div className="flex items-center">
-              <p className="text-lg font-semibold  cursor-auto my-3">
-                ${price}
-              </p>
-              <del>
-                <p className="text-sm  cursor-auto ml-2">$999</p>
-              </del>
-              <div className="ml-auto bg-red-400 rounded-md ">
-                <button className="m-2" onClick={handleAddCart}>
-                  Add to cart
-                </button>
-              </div>
-            </div>
-          </div>
-        </Link>
+    <div
+      className={`relative m-4 flex w-full max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 shadow-md cursor-pointer transition-transform duration-300 hover:scale-105 ${
+        theme === 'light' ? 'bg-gray-700 text-white' : 'bg-white text-black'
+      }`}
+      onClick={handleClick}
+    >
+      <div className="relative mx-3 mt-3 flex h-36 overflow-hidden rounded-xl">
+        <img
+          className="object-contain w-full h-full"
+          src={images[0]}
+          alt={title}
+        />
+        <span className="absolute top-0 left-0 m-2 rounded-full bg-black px-2 text-sm font-medium text-white">
+          39% OFF
+        </span>
       </div>
-    </>
+      <div className="mt-4 px-5 pb-5">
+        <h5 className="text-base font-semibold tracking-tight">{title}</h5>
+        <p className="text-gray-500 text-sm">{brand}</p>
+        <div className="mt-2 mb-5 flex items-center justify-between">
+          <p>
+            <span className="text-xs font-bold">${price}</span>
+            <span className="text-sm text-gray-500 line-through ml-2">
+              $999
+            </span>
+          </p>
+          <div className="flex items-center space-x-1">
+            {[...Array(5)].map((_, i) => (
+              <svg
+                key={i}
+                className="h-5 w-5 text-yellow-300"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+            ))}
+          </div>
+        </div>
+        <button
+          className="w-full rounded-lg bg-red-500 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-red-600"
+          onClick={handleAddCart}
+        >
+          Add to cart
+        </button>
+      </div>
+    </div>
   );
 };
 

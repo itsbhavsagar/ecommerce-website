@@ -27,12 +27,12 @@ const CartRow = ({ cartObj }) => {
   };
 
   let lightTheme = 'lg:col-span-2 bg-white divide-y';
-  let darkTheme = 'lg:col-span-2 bg-slate-800 shadow-md divide-y text-white';
+  let darkTheme = 'lg:col-span-2 bg-gray-700 shadow-md divide-y text-white';
 
   return (
-    <div className={theme == 'light' ? lightTheme : darkTheme}>
+    <div className={theme == 'light' ? darkTheme : lightTheme}>
       <div className="flex items-start max-sm:flex-col gap-4 py-4">
-        <div className="h-36 shrink-0 bg-slate-200 rounded">
+        <div className="h-36 shrink-0 bg-white rounded">
           <img
             src={thumbnail}
             className="w-full h-full object-contain rounded-md"

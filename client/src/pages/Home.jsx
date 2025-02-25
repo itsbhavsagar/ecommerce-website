@@ -7,13 +7,12 @@ import AddedProductInCart from '../features/cart/AddedProductInCart';
 import { useSelector } from 'react-redux';
 
 const Home = () => {
-  let [allData, setAllData] = useState([]);
-  let [ProductArray, setProductArray] = useState([]);
-  let [searchText, setSearchText] = useState('');
+  const [allData, setAllData] = useState([]);
+  const [ProductArray, setProductArray] = useState([]);
+  const [searchText, setSearchText] = useState('');
 
-  let arr = useGetAllProducts();
-
-  let idsArray = useSelector((state) => state.cart.ids);
+  const arr = useGetAllProducts();
+  const idsArray = useSelector((state) => state.cart.ids);
 
   useEffect(() => {
     setAllData(arr);
@@ -21,39 +20,37 @@ const Home = () => {
   }, [arr]);
 
   // Dark and Light Theme
-  let { theme } = useContext(Theme);
+  const { theme } = useContext(Theme);
 
-  let filterTopRated = () => {
-    let data = ProductArray.filter((obj) => obj.rating > 4.5);
-    setProductArray(data);
+  const filterTopRated = () => {
+    setProductArray(allData.filter((obj) => obj.rating > 4.5));
   };
 
-  let filterProduct = (proCategory) => {
-    let data = allData.filter((obj) => {
-      return proCategory.toLowerCase() == obj.category.toLowerCase();
-    });
-    setProductArray(data);
-  };
-
-  let searchProduct = () => {
-    let data = allData.filter((obj) =>
-      obj.title.toLowerCase().includes(searchText.toLowerCase())
+  const filterProduct = (proCategory) => {
+    setProductArray(
+      allData.filter(
+        (obj) => obj.category.toLowerCase() === proCategory.toLowerCase()
+      )
     );
+  };
 
-    setProductArray(data);
+  const searchProduct = () => {
+    setProductArray(
+      allData.filter((obj) =>
+        obj.title.toLowerCase().includes(searchText.toLowerCase())
+      )
+    );
     setSearchText('');
   };
 
-  if (ProductArray.length == 0) {
+  if (ProductArray.length === 0) {
     return <ShimmerUI />;
   }
 
-  // Dynamic Themes
-  let lightTheme = 'bg-slate-200 text-black duration-500';
-  let darkTheme = 'bg-gray-600 text-white duration-500';
+  const lightTheme = 'bg-white text-black duration-500';
+  const darkTheme = 'bg-gray-700 text-white duration-500';
 
-  // Product Added Notification
-  let AddedComponent = AddedProductInCart(ProductCard); // Its a HOC
+  const AddedComponent = AddedProductInCart(ProductCard);
 
   return (
     <div
@@ -65,77 +62,44 @@ const Home = () => {
       <div className="flex flex-col items-center gap-4 md:flex-row md:justify-between">
         {/* FILTER BUTTONS */}
         <div className="flex flex-wrap gap-4">
-          <button
-            className={`btn ${
-              theme === 'light'
-                ? 'bg-gray-700 text-white '
-                : 'bg-slate-200 text-black hover:text-white'
-            }`}
-            onClick={filterTopRated}
-          >
-            Top Rated
-          </button>
-          <button
-            className={`btn ${
-              theme === 'light'
-                ? 'bg-gray-700 text-white '
-                : 'bg-slate-200 text-black hover:text-white'
-            }`}
-            onClick={() => filterProduct('beauty')}
-          >
-            Beauty
-          </button>
-          <button
-            className={`btn ${
-              theme === 'light'
-                ? 'bg-gray-700 text-white '
-                : 'bg-slate-200 text-black hover:text-white'
-            }`}
-            onClick={() => filterProduct('fragrances')}
-          >
-            Fragrances
-          </button>
-          <button
-            className={`btn ${
-              theme === 'light'
-                ? 'bg-gray-700 text-white '
-                : 'bg-slate-200 text-black hover:text-white'
-            }`}
-            onClick={() => filterProduct('furniture')}
-          >
-            Furniture
-          </button>
-          <button
-            className={`btn ${
-              theme === 'light'
-                ? 'bg-gray-700 text-white '
-                : 'bg-slate-200 text-black hover:text-white'
-            }`}
-            onClick={() => filterProduct('groceries')}
-          >
-            Groceries
-          </button>
+          {['Top Rated', 'Beauty', 'Fragrances', 'Furniture', 'Groceries'].map(
+            (category, index) => (
+              <button
+                key={index}
+                className={`btn ${
+                  theme === 'light'
+                    ? 'bg-gray-700 text-white'
+                    : 'bg-white text-black hover:text-white'
+                }`}
+                onClick={() =>
+                  category === 'Top Rated'
+                    ? filterTopRated()
+                    : filterProduct(category)
+                }
+              >
+                {category}
+              </button>
+            )
+          )}
         </div>
 
         {/* SEARCH BAR */}
         <div className="flex items-center gap-2">
           <input
             value={searchText}
-            onChange={(event) => {
-              setSearchText(event.target.value);
-            }}
+            onChange={(event) => setSearchText(event.target.value)}
             type="text"
             placeholder="Search"
             className={`input input-bordered w-64 ${
               theme === 'light'
-                ? 'bg-gray-700 text-white border-gray-500 '
-                : 'bg-slate-200 text-black border-slate-500'
+                ? 'bg-gray-700 text-white border-gray-500'
+                : 'bg-white text-black border-slate-500'
             }`}
           />
           <button
             className={`btn ${
               theme === 'light'
-                ? 'bg-yellow-600 text-white '
+                ? 'bg-yellow-600 text-white'
                 : 'bg-yellow-300 text-black hover:text-white'
             }`}
             onClick={searchProduct}
@@ -146,10 +110,10 @@ const Home = () => {
       </div>
 
       {/* PRODUCT GRID */}
-      <div className="grid grid-cols-1 gap-8 mt-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="grid grid-cols-1 gap-4 mt-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
         {ProductArray.map((obj) =>
-          idsArray.find((id) => obj.id == id) !== undefined ? (
-            <AddedComponent obj={obj} key={obj.id}></AddedComponent>
+          idsArray.includes(obj.id) ? (
+            <AddedComponent obj={obj} key={obj.id} />
           ) : (
             <ProductCard obj={obj} key={obj.id} />
           )

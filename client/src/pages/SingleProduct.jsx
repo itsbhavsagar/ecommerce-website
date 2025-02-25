@@ -7,27 +7,22 @@ import { addCart } from '../features/cart/CartSlice';
 import Reviews from '../components/Reviews';
 
 const SingleProduct = () => {
-  let { theme } = useContext(Theme);
-
-  let { id } = useParams();
-
-  let dispatch = useDispatch();
-
-  let obj = useGetSingleProduct(id);
-
-  let idsArray = useSelector((state) => state.cart.ids);
-
-  let [showIndex, setShowIndex] = useState(null);
+  const { theme } = useContext(Theme);
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const obj = useGetSingleProduct(id);
+  const idsArray = useSelector((state) => state.cart.ids);
+  const [showIndex, setShowIndex] = useState(null);
 
   const handleAddToCart = () => {
     dispatch(addCart({ id, obj }));
   };
 
-  if (obj == null) {
-    return <h1>....loading</h1>;
+  if (!obj) {
+    return <h1 className="text-center text-lg">Loading...</h1>;
   }
 
-  let {
+  const {
     title,
     description,
     images,
@@ -37,193 +32,82 @@ const SingleProduct = () => {
     brand,
     reviews,
   } = obj;
+  const isAddedToCart = idsArray.includes(id);
 
-  let lightTheme = 'py-12 sm:py-16 bg-slate-200 text-black duration-500';
-  let darkTheme = 'py-12 sm:py-16 bg-gray-600 text-white ';
+  const themeClasses =
+    theme === 'light' ? 'bg-gray-700 text-white' : 'bg-white text-black';
 
   return (
-    <section className={theme == 'light' ? darkTheme : lightTheme}>
-      {idsArray.find((cartId) => cartId == id) != undefined ? (
-        <p className="text-white bg-green-700 font-bold text-xs absolute z-10 mt-8 ml-10 p-2 rounded-lg shadow-md ">
+    <section className={`py-12 sm:py-16 duration-500 ${themeClasses}`}>
+      {isAddedToCart && (
+        <p className="text-white bg-green-700 font-bold text-xs absolute z-10 mt-8 p-2 rounded-lg shadow-md">
           Added to cart
         </p>
-      ) : (
-        <></>
       )}
-      <div className="container mx-auto px-4">
-        <nav className="flex">
-          <ol role="list" className="flex items-center">
-            <li className="text-left">
-              <div className="-m-1">
-                <a
-                  href="#"
-                  className="rounded-md p-1 text-sm font-medium  focus:text-gray-900 focus:shadow hover:text-gray-800"
-                >
-                  Home
-                </a>
-              </div>
-            </li>
-
-            <li className="text-left">
-              <div className="flex items-center">
-                <span className="mx-2 0">/</span>
-                <div className="-m-1">
-                  <a
-                    href="#"
-                    className="rounded-md p-1 text-sm font-medium  focus:text-gray-900 focus:shadow hover:text-gray-800"
-                  >
-                    Products
-                  </a>
-                </div>
-              </div>
-            </li>
-
-            <li className="text-left">
-              <div className="flex items-center">
-                <span className="mx-2 0">/</span>
-                <div className="-m-1">
-                  <a
-                    href="#"
-                    className="rounded-md p-1 text-sm font-medium  focus:text-gray-900 focus:shadow hover:text-gray-800"
-                    aria-current="page"
-                  >
-                    {category}
-                  </a>
-                </div>
-              </div>
-            </li>
-          </ol>
+      <div className="container mx-auto px-4 max-w-6xl">
+        <nav className="flex text-sm mb-4">
+          <a href="#" className="hover:underline">
+            Home
+          </a>{' '}
+          /
+          <a href="#" className="hover:underline">
+            Products
+          </a>{' '}
+          /<span className="font-bold">{category}</span>
         </nav>
 
-        <div className="lg:col-gap-12 xl:col-gap-16 mt-8 grid grid-cols-1 gap-12 lg:mt-12 lg:grid-cols-5 lg:gap-16">
-          <div className="lg:col-span-3 lg:row-end-1">
-            <div className="lg:flex lg:items-start">
-              <div className="lg:order-2 lg:ml-5">
-                <div className="max-w-xl overflow-hidden rounded-lg">
-                  <img
-                    className="h-full w-full max-w-full object-cover"
-                    src={thumbnail}
-                    alt=""
-                  />
-                </div>
-              </div>
-
-              <div className="mt-2 w-full lg:order-1 lg:w-32 lg:flex-shrink-0">
-                <div className="flex flex-row items-start lg:flex-col">
-                  <button
-                    type="button"
-                    className="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-gray-900 text-center"
-                  >
-                    <img
-                      className="h-full w-full object-cover"
-                      src={images}
-                      alt=""
-                    />
-                  </button>
-                  <button
-                    type="button"
-                    className="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-transparent text-center"
-                  >
-                    <img
-                      className="h-full w-full object-cover"
-                      src={images}
-                      alt=""
-                    />
-                  </button>
-                  <button
-                    type="button"
-                    className="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-transparent text-center"
-                  >
-                    <img
-                      className="h-full w-full object-cover"
-                      src={images}
-                      alt=""
-                    />
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="lg:col-span-2 lg:row-span-2 lg:row-end-2">
-            <h2 className="mt-8 text-base ">{brand}</h2>
-            <h1 className="text-2xl font-bold  sm:text-3xl">{title}</h1>
-
-            <div className="mt-5 flex items-center">
-              <div className="flex items-center">
-                <p>⭐️⭐️⭐️⭐️</p>
-              </div>
-              <p className="ml-2 text-sm font-medium ">1,209 Reviews</p>
-            </div>
-
-            <div className="mt-10 flex flex-col items-center justify-between space-y-4 border-t-1 border-b border-gray-300  py-4 sm:flex-row sm:space-y-0">
-              <div className="flex items-end">
-                <h1 className="text-3xl font-bold ">${price}</h1>
-              </div>
-
-              <button
-                type="button"
-                className="inline-flex items-center justify-center rounded-md border-2 hover:border-green-500 shadow-lg hover:shadow-green-400 hover:duration-700 px-12 py-3 text-center text-base font-bold"
-                onClick={handleAddToCart}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="shrink-0 mr-3 h-5 w-5 "
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-                  />
-                </svg>
-                Add to cart
-              </button>
-            </div>
-          </div>
-
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
           <div className="lg:col-span-3">
-            <div className="border-b border-gray-300 ">
-              <nav className="flex gap-4">
-                <a
-                  href="#"
-                  title=""
-                  className="border-b-2 border-gray-900 py-4 text-sm font-medium  hover:border-gray-400 "
-                >
-                  Description
-                </a>
-
-                <a
-                  href="#"
-                  title=""
-                  className="inline-flex items-center border-b-2 border-transparent py-4 text-sm font-medium "
-                >
-                  Reviews
-                  <span className="ml-2 block rounded-full  px-2 py-px text-xs font-bold ">
-                    1,209
-                  </span>
-                </a>
-              </nav>
+            <div className="relative max-w-xl mx-auto">
+              <img
+                src={thumbnail}
+                alt={title}
+                className="w-full h-[400px] object-contain rounded-lg shadow-md"
+              />
+              <div className="flex gap-2 mt-4 justify-center">
+                {images.map((img, idx) => (
+                  <img
+                    key={idx}
+                    src={img}
+                    alt="Thumbnail"
+                    className="w-14 h-14 object-cover rounded-lg cursor-pointer border hover:border-gray-500 transition"
+                  />
+                ))}
+              </div>
             </div>
+          </div>
 
-            <div className="mt-8 flow-root sm:mt-12 w-4/5 ">
-              <h1 className="mt-8 text-3xl font-bold w-4/5">{title}</h1>
-              <p className="mt-4">{description}</p>
+          <div className="lg:col-span-2 space-y-4">
+            <h2 className="text-sm text-gray-500">{brand}</h2>
+            <h1 className="text-2xl font-bold sm:text-3xl">{title}</h1>
+            <p className="text-xl text-green-500 font-bold">${price}</p>
+
+            <button
+              className="mt-4 w-full max-w-xs bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md shadow-md text-lg transition"
+              onClick={handleAddToCart}
+            >
+              Add to Cart
+            </button>
+
+            <div className="mt-4">
+              <h3 className="text-lg font-semibold">Description</h3>
+              <p className="text-sm ">{description}</p>
             </div>
           </div>
         </div>
-        <div className="reviewBox border-2 border-red-400 m-2  flex flex-col items-center  justify-center">
-          {reviews.map((obj, idx) => (
-            <Reviews
-              obj={obj}
-              showIndex={showIndex}
-              setShowIndex={setShowIndex}
-              key={idx}
-            ></Reviews>
-          ))}
+
+        <div className="mt-12">
+          <h3 className="text-lg font-semibold">Customer Reviews</h3>
+          <div className="mt-4 space-y-2">
+            {reviews.map((review, idx) => (
+              <Reviews
+                key={idx}
+                obj={review}
+                showIndex={showIndex}
+                setShowIndex={setShowIndex}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
