@@ -1,8 +1,36 @@
 import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Theme } from '../hooks/ThemeContext';
 import { useFormik } from 'formik';
 import { signupSchema } from '../utility/validation-schema.utility';
 
 const Signup = () => {
+  const { theme } = useContext(Theme);
+
+  const lightTheme = 'flex w-screen flex-wrap text-slate-800 h-[90vh] bg-white';
+  const darkTheme = 'flex w-screen flex-wrap text-slate-800 h-[90vh]';
+
+  const signIn = async (values) => {
+    try {
+      const res = await fetch('http://localhost:5143/users/signup', {
+        method: 'POST', // ✅ Corrected typo
+        headers: {
+          'Content-Type': 'application/json', // ✅ Ensure content type is JSON
+        },
+        body: JSON.stringify(values), // ✅ Convert object to JSON
+      });
+
+      const data = await res.json();
+      console.log('Response:', data);
+
+      if (!res.ok) {
+        throw new Error(data.message || 'Signup failed');
+      }
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
+  };
+
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -11,13 +39,15 @@ const Signup = () => {
     },
     validationSchema: signupSchema,
     onSubmit: (values, action) => {
+      console.log('Form submitted with values:', values);
+      signIn(values);
       console.log(values);
       action.resetForm();
     },
   });
 
   return (
-    <div className="flex w-screen flex-wrap text-slate-800 h-[90vh]">
+    <div className={theme === 'light' ? darkTheme : lightTheme}>
       {/* Left Side (Image) */}
       <div className="relative hidden select-none flex-col justify-center bg-blue-600 text-center md:flex md:w-1/2">
         <div className="mx-auto py-16 px-8 text-white xl:w-[40rem]">
@@ -68,6 +98,7 @@ const Signup = () => {
                 <input
                   type="text"
                   id="name"
+                  name="name" // ✅ Added `name` attribute
                   className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
                   placeholder="Name"
                   onChange={formik.handleChange}
@@ -86,6 +117,7 @@ const Signup = () => {
                 <input
                   type="email"
                   id="email"
+                  name="email" // ✅ Added `name` attribute
                   className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
                   placeholder="Email"
                   onChange={formik.handleChange}
@@ -106,6 +138,7 @@ const Signup = () => {
                 <input
                   type="password"
                   id="password"
+                  name="password" // ✅ Added `name` attribute
                   className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
                   placeholder="Password (minimum 8 characters)"
                   onChange={formik.handleChange}
@@ -138,6 +171,7 @@ const Signup = () => {
             {/* Submit Button */}
             <button
               type="submit"
+              onClick={() => console.log('Submit button clicked')}
               className="mt-6 rounded-lg bg-blue-600 px-4 py-2 text-center text-base font-semibold text-white shadow-md outline-none ring-blue-500 ring-offset-2 transition hover:bg-blue-700 focus:ring-2 md:w-32"
             >
               Sign Up

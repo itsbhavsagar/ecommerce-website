@@ -24,7 +24,7 @@ const login = async (req, res) => {
       const option = { httpOnly: true, secure: true };
 
       return res
-        .status(201)
+        .status(200)
         .cookie('Token', token, option)
         .send({ result: true, message: 'Login Successful' });
     } else {
