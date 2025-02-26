@@ -64,9 +64,47 @@ const signup = async (req, res) => {
 };
 
 const getuser = (req, res) => {
-  res.send('ok');
+  try {
+    const user = req.user;
+    return res.send({ result: true, message: 'User Data', data: user });
+  } catch (err) {
+    return res.send({ result: false, message: err.message });
+  }
 };
 
-const updateuser = (req, res) => {};
+const updateuser = async (req, res) => {
+  if (!req.user) {
+    return res.send({ result: false, message: 'Please Login' });
+  }
+  try {
+    const user = req.user;
+    const { _id } = user;
 
-export { login, signup, getuser, updateuser };
+    const updatedData = await User.findByIdAndUpdate(_id, req.body, {
+      new: true,
+    });
+
+    return res.send({
+      result: true,
+      message: 'User Updated Successfully',
+      data: updatedData,
+    });
+  } catch (err) {
+    return res.send({ result: false, message: err.message });
+  }
+};
+
+const logoutuser = async (req, res) => {
+  if (!req.user) {
+    return res.send({ result: false, message: 'Please Login' });
+  }
+  try {
+    return res
+      .clearCookie('Token')
+      .send({ result: true, message: 'User Logged Out Successfully' });
+  } catch (err) {
+    return res.send({ result: false, message: err.message });
+  }
+};
+
+export { login, signup, getuser, updateuser, logoutuser };
